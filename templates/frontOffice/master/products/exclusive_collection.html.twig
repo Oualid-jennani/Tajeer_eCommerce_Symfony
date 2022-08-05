@@ -1,0 +1,48 @@
+{% if products is not empty %}
+    <!-- Product details Start -->
+    <section class=" pb-0">
+        <div class="border-theme add-banner br-5 main-title">
+            <div class="title">
+                <h2>Exclusive Collections</h2>
+            </div>
+            <div>
+                <div class="vert-midd theme-slider">
+                    {% for product in products %}
+                        <div class="inner-slide">
+                        <div class="media d-flex">
+                            <div class="img-wrapper">
+                                <div class="front">
+                                    <a href=""><img src="{{ asset('images/product/') }}{{ product.images[0] }}" alt="product" class="img-fluid" width="300" height="300"></a>
+                                </div>
+                            </div>
+                            <div class="media-body align-self-center">
+                                <div class="timer-product-desc">
+                                    <div class="product-info">
+                                        <a href="#"><h6 class="mb-3">{{ product.name }}</h6></a>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <p class="pro-desc">{{ product.description }}</p>
+                                        <div class="prices">
+                                            <h4 class="pro-price text-success fw-bold">{{ product.price }} Dhs</h4>
+                                            <h4 class="pro-price-del text-danger"><del>{{ product.compareAtPrice }}</del> Dhs</h4>
+                                        </div>
+                                        <a class="slider_btn theme_btn btn_5" data-animation-in="slideInUp" data-animation-out="animate-out slideOutDown" href="{{ path('product',{'slug':product.slug}) }}">
+                                            {{ 'Shop Now'|trans }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product details end -->
+{% endif %}

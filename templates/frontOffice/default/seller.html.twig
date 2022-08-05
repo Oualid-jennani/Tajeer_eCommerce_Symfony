@@ -1,0 +1,272 @@
+{% extends 'base.html.twig' %}
+{% block leftSideBar %}
+    <div class="collection-wrapper">
+        <div class="row">
+            <div class="col collection-filter">
+                <!-- side-bar colleps block stat -->
+                <div class="collection-filter-block sidebar">
+                    <form>
+                        <!-- brand filter start -->
+                        <div class="collection-mobile-back mb-2"><span class="filter-back"><i class="fa fa-angle-left" aria-hidden="true"></i> back</span></div>
+                        <div class="collection-collapse-block mb-2 open">
+                            <h3 class="collapse-block-title">{{ 'Category'|trans }}</h3>
+                            <div class="collection-collapse-block-content">
+                                <div class="collection-brand-filter">
+                                    {% for category in categories %}
+                                        <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                            <input type="checkbox" name="categories[]" class="custom-control-input" value="{{ category.slug }}" id="category_{{ category.slug }}">
+                                            <label class="custom-control-label" for="category_{{ category.slug }}">{{ category.name }}</label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="collection-collapse-block mb-2 border-0 open">
+                            <h3 class="collapse-block-title">{{ 'price'|trans }}</h3>
+                            <div class="collection-collapse-block-content">
+                                <div class="collection-brand-filter">
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" name="pricesRange[]" value="0,100" class="custom-control-input" id="hundred">
+                                        <label class="custom-control-label" for="hundred">0Dhs - 100Dhs</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" name="pricesRange[]" value="100,500" class="custom-control-input" id="twohundred">
+                                        <label class="custom-control-label" for="twohundred">100Dhs - 500Dhs</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" name="pricesRange[]" value="500,1000" class="custom-control-input" id="threehundred">
+                                        <label class="custom-control-label" for="threehundred">500Dhs - 1000Dhs</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" name="pricesRange[]" value="1000,5000" class="custom-control-input" id="fourhundred">
+                                        <label class="custom-control-label" for="fourhundred">1000Dhs - 5000Dhs</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" name="pricesRange[]" value="5000,100000" class="custom-control-input" id="fourhundredabove">
+                                        <label class="custom-control-label" for="fourhundredabove">5000Dhs {{ 'above'|trans }}</label>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <button class="theme_btn float-none w-100" style="padding: 5px 10px;border-radius:0px">
+                                        <i class="fa fa-filter" aria-hidden="true"></i>
+                                        {{ 'Filter'|trans }}
+                                        <span class="theme_btn_eff"></span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                    <!-- side-bar single product slider start -->
+                    <div class="theme-card">
+                        <h5 class="title-border">{{ 'New product'|trans }}</h5>
+                        <div class="offer-slider slide-1">
+                            <div>
+                                {% for product in seller.products | sort|reverse|slice(0,3) %}
+                                    <div class="media d-flex">
+                                        <a href="{{ path('product',{'slug':product.slug}) }}"><img src="{{ asset('/images/product/'~product.images[0]) }}" class="img-fluid" alt=""></a>
+                                        <div class="media-body align-self-center">
+                                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="#"><h6>{{ product.name }}</h6></a>
+                                            <h4>{{ product.price }} Dhs</h4></div>
+                                    </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- side-bar single product slider end -->
+                </div>
+                <div class="collection-sidebar-banner">
+                    <a href="#"><img src="assets/images/side-a-banner-1.jpg" class="img-fluid" alt=""></a>
+                </div>
+                <!-- side-bar banner end here -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block slider %}
+    <!-- Breadcrumb Start -->
+    <div class="bread_crumb shop_bread_crumb mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 sec_low">
+                    <div class="functionalities">
+                        <ul id="breadcrumb" class="breadcrumb">
+                            <li><a title="Home" href="contraction.html"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                            <li><strong><i class="fa fa-angle-double-right" aria-hidden="true"></i>{{ seller.storeName }}</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="page-title">
+                        <h2>{{ seller.storeName }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Start -->
+    <!--  Slider_start  -->
+    <div class="home-slider slider-ecommerce">
+        <div class="slide_1 owl-carousel owl-theme">
+
+            {% for slider in seller.sliderSellers %}
+                <div>
+                    <img src="{{ asset('images/slider-seller/') }}{{ slider.imageUrl }}" class="bg-img">
+                    <div class="slider_content">
+                        <div>
+                            <h1 data-animation-in="slideInDown" data-animation-out="animate-out slideOutUp"><span class="sec_one">{{ slider.title }}</span></h1>
+                            {% if slider.description %}
+                                <h5 data-animation-in="slideInRight" data-animation-out="animate-out fadeOut">{{ slider.description }}</h5>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <!--  Slider_End  -->
+{% endblock %}
+{% block body %}
+    <!-- section start -->
+    <section class="section-b-space cmn_bg_yellow shop_page">
+
+        <ul class="plus_decore">
+            <li></li>
+            <li></li>
+        </ul>
+
+        <div class="collection-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="collection-content col">
+                        <div class="page-main-content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="collection-product-wrapper">
+{#                                        <div class="product-top-filter">#}
+{#                                            <div class="row">#}
+{#                                                <div class="col-xl-12">#}
+{#                                                    <div class="filter-main-btn"><span class="filter-btn btn btn-theme"><i class="fa fa-filter" aria-hidden="true"></i> Filter</span></div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="row">#}
+{#                                                <div class="col-12">#}
+{#                                                    <div class="product-filter-content">#}
+{#                                                        <div class="search-count">#}
+{#                                                            <h5>Showing Products 1-24 of 10 Result</h5>#}
+{#                                                        </div>#}
+{#                                                        <div class="product-page-per-view">#}
+{#                                                            <select>#}
+{#                                                                <option value="High to low">24 Products Par Page</option>#}
+{#                                                                <option value="Low to High">50 Products Par Page</option>#}
+{#                                                                <option value="Low to High">100 Products Par Page</option>#}
+{#                                                            </select>#}
+{#                                                        </div>#}
+{#                                                        <div class="product-page-filter">#}
+{#                                                            <select>#}
+{#                                                                <option value="High to low">Sorting items</option>#}
+{#                                                                <option value="Low to High">50 Products</option>#}
+{#                                                                <option value="Low to High">100 Products</option>#}
+{#                                                            </select>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+                                        <div class="product-wrapper-grid mt-2">
+                                            <div class="row">
+                                                {% for product in products |sort|reverse %}
+                                                    <div class="col-md-4 col-6 col-grid-box">
+                                                        <div class="product-box">
+                                                            <div class="img-wrapper">
+                                                                <div class="front">
+                                                                    {% if product.productType != "Local" %}
+                                                                        <div class="sale">
+                                                                            <span class="site-button button-sm bg-info text-white">{{ 'Expedie from'|trans }} {{ product.expeditionCountry }}</span>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    <a href="{{ path('product',{'slug':product.slug}) }}"><img src="{{ asset('/images/product/'~product.images[0]) }}" class="img-fluid" alt=""></a>
+                                                                    <div>
+                                                                        <a href="#" title="Add to cart" class="add_hover"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="product-detail">
+                                                                <div>
+                                                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="#"><h6>{{ product.name }}</h6></a>
+                                                                    <h5>Category : {{ product.category.name }}</h5>
+                                                                    <h4>
+                                                                        {{ product.price }} Dhs
+                                                                        {% if product.compareAtPrice %}
+                                                                            <del class="m-l10 text-danger">{{ product.compareAtPrice }} Dhs</del>
+                                                                        {% endif %}
+                                                                    </h4>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+
+{#                                        <!-- pagination Start -->#}
+{#                                        <div class="pagination_sec">#}
+{#                                            <div class="content_detail__pagination cdp">#}
+{#                                                <a href="#" class="cdp_i"><i class="fa fa-angle-double-left" aria-hidden="true"></i>prev</a>#}
+{#                                                <a href="#" class="cdp_i">1</a>#}
+{#                                                <a href="#" class="cdp_i">2</a>#}
+{#                                                <a href="#" class="cdp_i">3</a>#}
+{#                                                <a href="#" class="cdp_i">next<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <!-- pagination End -->#}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section End -->
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var categories = [];
+        {% for category in categoriesRange %}
+            categories.push("{{ category |escape('js') }}")
+        {% endfor %}
+
+        var pricesRange = [];
+        {% for priceRange in pricesRange %}
+            pricesRange.push("{{ priceRange |escape('js') }}")
+        {% endfor %}
+
+        var checkboxesCategories = document.getElementsByName('categories[]');
+        for (var i=0; i < checkboxesCategories.length;i++)
+        {
+            if (categories.includes(checkboxesCategories[i].value))
+            {
+                checkboxesCategories[i].checked = true;
+            }
+        }
+
+        var checkboxesPriceRange = document.getElementsByName('pricesRange[]');
+        for (var i=0; i < checkboxesPriceRange.length;i++)
+        {
+            if (pricesRange.includes(checkboxesPriceRange[i].value))
+            {
+                checkboxesPriceRange[i].checked = true;
+            }
+        }
+    </script>
+
+{% endblock %}

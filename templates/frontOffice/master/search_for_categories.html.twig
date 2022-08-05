@@ -1,0 +1,5 @@
+<ul>
+    {% for category in categories %}
+        <option value="{{ category.slug }}"> {{ category.name }} </option>
+    {% endfor %}
+</ul>

@@ -1,0 +1,105 @@
+{% extends 'baseDash.html.twig' %}
+
+{% block title %}Countries{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('dashAssets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">{{ 'Countries'|trans }}</div>
+    </div>
+    <!--end breadcrumb-->
+    <div class="row">
+        <div class="col-xl-9 mx-auto">
+            <h6 class="mb-0 text-uppercase">{{ 'Add Country'|trans }}</h6>
+            <hr/>
+            <div class="card">
+                <div class="card-body">
+                    {% for type,messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }} border-0 bg-{{ type }} alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-white">
+                                        {% if type =="success" %}
+                                            <i class="bx bxs-check-circle"></i>
+                                        {% else %}
+                                            <i class="bx bxs-message-square-x"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-white">{{ type }}</h6>
+                                        <div class="text-white">{{ message }}</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    <div class="p-4 border rounded">
+                        {{ form_start(form ,{'attr':{'class':'row g-3 needs-validation','novalidate':''}}) }}
+
+                        <div class="col-md-12">
+                            <label for="validationCustom01" class="form-label">{{ 'Name'|trans }}</label>
+                            {{ form_widget(form.name) }}
+                            <div class="valid-feedback">{{ form_errors(form.name) }}</div>
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">{{ 'Save'|trans }}  <i class="bx bx-save"></i></button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--end row-->
+    <div class="row">
+        <h6 class="mb-0 text-uppercase">{{ 'Countries' }}</h6>
+        <hr/>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="countryTable" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>{{ 'Name'|trans }}</th>
+                            <th>{{ 'Provinces'|trans }}</th>
+                            <th>{{ 'Cities'|trans }}</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for country in countries %}
+                            <tr>
+                                <td>{{ country.name }}</td>
+                                <td>{{ country.provinces.count }}</td>
+                                <td>{{ country.cities.count }}</td>
+                                <td>
+                                    <div class="d-flex order-actions">
+                                        <a href="javascript:;" class=""><i class="bx bxs-edit"></i></a>
+                                        <a href="javascript:;" class="ms-3"><i class="bx bxs-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('dashAssets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('dashAssets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $('#countryTable').DataTable();
+    </script>
+{% endblock %}

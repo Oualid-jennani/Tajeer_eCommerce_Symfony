@@ -1,0 +1,157 @@
+@font-face {
+  font-family: "Flaticon";
+  src: url("../fonts/Flaticon.eot");
+  src: url("../fonts/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff2") format("woff2"),
+       url("../fonts/Flaticon.woff") format("woff"),
+       url("../fonts/Flaticon.ttf") format("truetype"),
+       url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+.fimanager:before {
+      display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    display: block;
+}
+
+.flaticon-001-advertising:before { content: "\f100"; }
+.flaticon-002-agent:before { content: "\f101"; }
+.flaticon-003-property:before { content: "\f102"; }
+.flaticon-004-insurance:before { content: "\f103"; }
+.flaticon-005-agent:before { content: "\f104"; }
+.flaticon-006-real-estate:before { content: "\f105"; }
+.flaticon-007-artboard:before { content: "\f106"; }
+.flaticon-008-bank:before { content: "\f107"; }
+.flaticon-009-real-estate:before { content: "\f108"; }
+.flaticon-010-broker:before { content: "\f109"; }
+.flaticon-011-home:before { content: "\f10a"; }
+.flaticon-012-buyer:before { content: "\f10b"; }
+.flaticon-013-calendar:before { content: "\f10c"; }
+.flaticon-014-customer-support:before { content: "\f10d"; }
+.flaticon-015-customer-support:before { content: "\f10e"; }
+.flaticon-016-chat:before { content: "\f10f"; }
+.flaticon-017-shed:before { content: "\f110"; }
+.flaticon-018-certified:before { content: "\f111"; }
+.flaticon-019-chat:before { content: "\f112"; }
+.flaticon-020-chat:before { content: "\f113"; }
+.flaticon-021-check-list:before { content: "\f114"; }
+.flaticon-022-value:before { content: "\f115"; }
+.flaticon-023-customer-support:before { content: "\f116"; }
+.flaticon-024-customer-support:before { content: "\f117"; }
+.flaticon-025-direction:before { content: "\f118"; }
+.flaticon-026-discount:before { content: "\f119"; }
+.flaticon-027-discount:before { content: "\f11a"; }
+.flaticon-028-mortgage:before { content: "\f11b"; }
+.flaticon-029-document:before { content: "\f11c"; }
+.flaticon-030-invest:before { content: "\f11d"; }
+.flaticon-031-loan:before { content: "\f11e"; }
+.flaticon-032-loan:before { content: "\f11f"; }
+.flaticon-033-drop:before { content: "\f120"; }
+.flaticon-034-contract:before { content: "\f121"; }
+.flaticon-035-for-sale:before { content: "\f122"; }
+.flaticon-036-for-sale:before { content: "\f123"; }
+.flaticon-037-real-estate:before { content: "\f124"; }
+.flaticon-038-house:before { content: "\f125"; }
+.flaticon-039-piggy-bank:before { content: "\f126"; }
+.flaticon-040-home:before { content: "\f127"; }
+.flaticon-041-security:before { content: "\f128"; }
+.flaticon-042-real-estate:before { content: "\f129"; }
+.flaticon-043-search:before { content: "\f12a"; }
+.flaticon-044-mortgage:before { content: "\f12b"; }
+.flaticon-045-invest:before { content: "\f12c"; }
+.flaticon-046-invest:before { content: "\f12d"; }
+.flaticon-047-property:before { content: "\f12e"; }
+.flaticon-048-bill:before { content: "\f12f"; }
+.flaticon-049-loan:before { content: "\f130"; }
+.flaticon-050-location:before { content: "\f131"; }
+.flaticon-051-loan:before { content: "\f132"; }
+.flaticon-052-location:before { content: "\f133"; }
+.flaticon-053-location:before { content: "\f134"; }
+.flaticon-054-thought:before { content: "\f135"; }
+.flaticon-055-mobile:before { content: "\f136"; }
+.flaticon-056-house:before { content: "\f137"; }
+.flaticon-057-invest:before { content: "\f138"; }
+.flaticon-058-investment:before { content: "\f139"; }
+.flaticon-059-navigation:before { content: "\f13a"; }
+.flaticon-060-network:before { content: "\f13b"; }
+.flaticon-061-sold:before { content: "\f13c"; }
+.flaticon-062-value:before { content: "\f13d"; }
+.flaticon-063-for-rent:before { content: "\f13e"; }
+.flaticon-064-for-sale:before { content: "\f13f"; }
+.flaticon-065-app:before { content: "\f140"; }
+.flaticon-066-app:before { content: "\f141"; }
+.flaticon-067-search:before { content: "\f142"; }
+.flaticon-068-pin:before { content: "\f143"; }
+.flaticon-069-planning:before { content: "\f144"; }
+.flaticon-070-property:before { content: "\f145"; }
+.flaticon-071-property:before { content: "\f146"; }
+.flaticon-072-property:before { content: "\f147"; }
+.flaticon-073-valuation:before { content: "\f148"; }
+.flaticon-074-house:before { content: "\f149"; }
+.flaticon-075-insurance:before { content: "\f14a"; }
+.flaticon-076-purchase:before { content: "\f14b"; }
+.flaticon-077-purchase:before { content: "\f14c"; }
+.flaticon-078-increase:before { content: "\f14d"; }
+.flaticon-079-invoice:before { content: "\f14e"; }
+.flaticon-080-house:before { content: "\f14f"; }
+.flaticon-081-real-estate:before { content: "\f150"; }
+.flaticon-082-email:before { content: "\f151"; }
+.flaticon-083-office:before { content: "\f152"; }
+.flaticon-084-home:before { content: "\f153"; }
+.flaticon-085-chat:before { content: "\f154"; }
+.flaticon-086-value:before { content: "\f155"; }
+.flaticon-087-value:before { content: "\f156"; }
+.flaticon-088-real-estate:before { content: "\f157"; }
+.flaticon-089-report:before { content: "\f158"; }
+.flaticon-090-graph:before { content: "\f159"; }
+.flaticon-091-search:before { content: "\f15a"; }
+.flaticon-092-home-insurance:before { content: "\f15b"; }
+.flaticon-093-home-insurance:before { content: "\f15c"; }
+.flaticon-094-seller:before { content: "\f15d"; }
+.flaticon-095-customer-service:before { content: "\f15e"; }
+.flaticon-096-maintenance:before { content: "\f15f"; }
+.flaticon-097-home:before { content: "\f160"; }
+.flaticon-098-box:before { content: "\f161"; }
+.flaticon-099-home:before { content: "\f162"; }
+.flaticon-100-moving-truck:before { content: "\f163"; }
+.flaticon-101-sold:before { content: "\f164"; }
+.flaticon-102-piggy-bank:before { content: "\f165"; }
+.flaticon-103-sweet-home:before { content: "\f166"; }
+.flaticon-104-app:before { content: "\f167"; }
+.flaticon-105-smart-home:before { content: "\f168"; }
+.flaticon-106-customer-service:before { content: "\f169"; }
+.flaticon-107-user:before { content: "\f16a"; }
+.flaticon-108-search:before { content: "\f16b"; }
+.flaticon-109-valuation:before { content: "\f16c"; }
+.flaticon-110-value:before { content: "\f16d"; }
+.flaticon-111-app:before { content: "\f16e"; }
+.flaticon-112-villa:before { content: "\f16f"; }
+.flaticon-113-website:before { content: "\f170"; }
+.flaticon-114-smart-home:before { content: "\f171"; }
+
+[class*=flaticon-]{
+  display: inline;
+  font-family: "Flaticon";
+  font-size: 40px;
+  font-weight: 600;
+  color: #5f5f5f;
+}

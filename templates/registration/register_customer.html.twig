@@ -1,0 +1,100 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <!-- section start -->
+    <section class="login-page  section-b-space cmn_bg_yellow">
+        <ul class="plus_decore">
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for type,messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }}">{{ message}}</div>
+                        {% endfor %}
+                    {% endfor%}
+                    <h3>create account</h3>
+                    {{ form_start(registrationForm,{'attr':{'class':'theme-form'}}) }}
+                    <div class="theme-card">
+                            <div class="form-row row g-3">
+                                <div class="col-sm-6">
+                                    <div class="text-danger">{{ form_errors(registrationForm.username) }}</div>
+                                    <label class="form-label">{{ 'Username'|trans }}</label>
+                                    {{ form_widget(registrationForm.username) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-danger">{{ form_errors(registrationForm.fullName) }}</div>
+                                    <label class="form-label">{{ 'FullName'|trans }}</label>
+                                    {{ form_widget(registrationForm.fullName) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-danger">{{ form_errors(registrationForm.phoneNumber) }}</div>
+                                    <label class="form-label">{{ 'Phone Number'|trans }}</label>
+                                    {{ form_widget(registrationForm.phoneNumber) }}
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="text-danger">{{ form_errors(registrationForm.email) }}</div>
+                                    <label class="form-label">{{ 'Email'|trans }}</label>
+                                    {{ form_widget(registrationForm.email) }}
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="text-danger">{{ form_errors(registrationForm.country) }}</div>
+                                    <label class="form-label">{{ 'Country'|trans }}</label>
+                                    {{ form_widget(registrationForm.country) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-danger">{{ form_errors(registrationForm.province) }}</div>
+                                    <label class="form-label">{{ 'Province'|trans }}</label>
+                                    {{ form_widget(registrationForm.province) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-danger">{{ form_errors(registrationForm.city) }}</div>
+                                    <label class="form-label">{{ 'City'|trans }}</label>
+                                    {{ form_widget(registrationForm.city) }}
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="text-danger">{{ form_errors(registrationForm.address) }}</div>
+                                    <label class="form-label">{{ 'Address'|trans }}</label>
+                                    {{ form_widget(registrationForm.address) }}
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="text-danger">{{ form_errors(registrationForm.password) }}</div>
+                                    <label class="form-label">{{ 'Password'|trans }}</label>
+                                    <div class="input-group" id="show_hide_password">
+                                        {{ form_widget(registrationForm.password) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-danger">{{ form_errors(registrationForm.confirm_password) }}</div>
+                                    <label class="form-label">{{ 'Comfirm Password'|trans }}</label>
+                                    {{ form_widget(registrationForm.confirm_password) }}
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="theme_btn" type="submit">
+                                        create Account
+                                        <span class="theme_btn_eff"></span>
+                                    </button>
+                                </div>
+
+
+                            </div>
+
+                    </div>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section End -->
+{% endblock %}
+
+

@@ -1,0 +1,220 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tajeer | {{ 'Cart'|trans }}{% endblock %}
+
+{% block body %}
+
+
+    <!-- Breadcrumb Start -->
+    <div class="bread_crumb shop_bread_crumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 sec_low">
+                    <div class="functionalities">
+                        <ul id="breadcrumb" class="breadcrumb">
+                            <li><a title="Home" href="contraction.html"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                            <li><strong><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ 'cart'|trans }}</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="page-title">
+                        <h2>{{ 'cart'|trans }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Start -->
+
+
+    {% if not cart|default(null) %}
+        <!-- =========================== Empty Cart =================================== -->
+        <section id="error_page" class="back_error cmn_bg">
+            <ul class="plus_decore">
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="not_found">
+                            <div class="text-center">
+                                <h1><i class="fa fa-shopping-cart"></i></h1>
+                                <h2>{{ 'Cart Emplty'|trans }}</h2>
+                                <p>{{ 'The Page You Are Attempting Reach Is Currently Not Available. This May Be Because
+                                The Page Does Not Exist Or Has Been Moved.'|trans }}</p>
+                                <div class="error_text">
+                                    <div>
+                                        <div class="btn_error">
+                                            <a class="slider_btn theme_btn" href="contraction.html">
+                                                {{ 'Back to home page'|trans }}
+                                                <span class="theme_btn_eff"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =========================== Empty Cart =================================== -->
+
+    {% else %}
+        <!-- Breadcrumb row END -->
+        {% form_theme form _self %}
+
+        <!--section start-->
+        <section class="cart-section section-b-space cmn_bg_yellow">
+            {{ form_start(form) }}
+            <ul class="plus_decore">
+                <li></li>
+                <li></li>
+            </ul>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="flash-messages">
+                            {% for  message in app.flashes('success') %}
+                                <div id="success-alert" class="alert alert-success alert-outline no-bg" role="alert">
+                                    <i class="flaticon-tick-inside-circle"></i>
+                                    <strong>{{ 'Success'|trans }} !</strong> {{ message }}
+                                    <!--
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    -->
+                                </div>
+                            {% endfor %}
+
+                            {% for  message in app.flashes('error') %}
+                                <div id="danger-alert" class="alert alert-danger alert-outline no-bg" role="alert">
+                                    <i class="flaticon-tick-inside-circle"></i>
+                                    <strong>{{ 'Wrong'|trans }} !</strong> {{ message }}
+                                    <!--
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    -->
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="row cart-buttons mb-3">
+                            <div class="col-sm-12">
+                                <button class="theme_btn rtl_r">
+                                    <i class="fa fa-edit fs-6"></i>
+                                    {{ 'Update Cart'|trans }}
+                                    <span class="theme_btn_eff"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="overflow-auto">
+                            <table class="table cart-table table-responsive-sm">
+                                <thead>
+                                <tr class="table-head">
+                                    <th scope="col">{{ 'image'|trans }}</th>
+                                    <th scope="col">{{ 'product name'|trans }}</th>
+                                    <th scope="col">{{ 'price'|trans }}</th>
+                                    <th scope="col">{{ 'quantity'|trans }}</th>
+                                    <th scope="col">{{ 'action'|trans }}</th>
+                                    <th scope="col">{{ 'total'|trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for row in form.cartLines %}
+                                    {{ form_row(row) }}
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <span>{{ 'total price '|trans}}:</span>
+                                    </td>
+                                    <td class="text-start">
+                                        <span class="total-price">
+                                            {{ cart.total|number_format(2, ',', ' ') }} Dhs
+                                        </span>
+                                    </td>
+                                </tr>
+                                </tfoot>
+
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row cart-buttons">
+                    <div class="col-sm-6">
+                        <a class="theme_btn rtl_r" href="#">
+                            {{ 'continue shopping'|trans }}
+                            <span class="theme_btn_eff"></span>
+                        </a>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <a class="theme_btn" href="{{ path('checkout') }}">
+                            {{ 'check out'|trans }}
+                            <span class="theme_btn_eff"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </section>
+        <!--section end-->
+
+    {% endif %}
+
+
+
+{% endblock %}
+
+{% block _cart_cartLines_entry_row %}
+
+    {% set line = form.vars.value %}
+
+    <tr>
+        <td>
+            <a href="javascript:void(0)"><img src="{{ asset('images/product/'~line.product.images[0]) }}" alt=""></a>
+        </td>
+        <td>
+            <a href="javascript:void(0)">{{ line.product.name }}</a>
+        </td>
+        <td>
+            <h2>
+                {% if not line.variant|default(null) %}
+                    {{ line.product.price|number_format(2, ',', ' ') }}
+                {% else %}
+                    {{ line.variant.price|number_format(2, ',', ' ') }}
+                {% endif %}
+                DH
+            </h2>
+        </td>
+        <td>
+            <div class="qty-box">
+                <div class="input-group">
+                    {{ form_widget(form.quantity, {'attr': {'class':'form-control input-number','min':'1'}}) }}
+                </div>
+            </div>
+        </td>
+        <td><a href="javascript:void(0)" class="icon icon-del"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+        <td><h2 class="td-color">{{ form.vars.value.total()|number_format(2, ',', ' ') }} Dhs</h2></td>
+    </tr>
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    <script>
+        $('.icon-del').click(function () {
+            $(this).parents("tr").remove();
+        })
+    </script>
+
+{% endblock %}
+

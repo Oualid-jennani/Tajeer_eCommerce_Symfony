@@ -1,0 +1,191 @@
+{% extends 'baseDash.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        .image-product{border-radius: 4px}
+        .image-product.active{border-color: black !important;}
+    </style>
+{% endblock %}
+
+
+{% block body %}
+
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">{{ 'Product'|trans }}</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ 'Detail'|trans }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+    <div class="row">
+
+        <div class="col-xl-10 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    {% for type,messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }} border-0 bg-{{ type }} alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-white">
+                                        {% if type =="success" %}
+                                            <i class="bx bxs-check-circle"></i>
+                                        {% else %}
+                                            <i class="bx bxs-message-square-x"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-white">{{ type }}</h6>
+                                        <div class="text-white">{{ message }}</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                    <div class="card-title d-flex align-items-center">
+                        <h5 class="mb-0 text-primary">{{ 'Products Detail'|trans }}</h5>
+                    </div>
+
+                    <div class="row g-0">
+                        {% if product.images is not empty %}
+                            <div class="col-md-4 border-end">
+                                <img id="show-img-product" src="{{ asset('images/product/') }}{{ product.images[0] }}" class="img-fluid" alt="...">
+                                <div class="row mb-3 row-cols-auto g-2 justify-content-center mt-3">
+                                    {% for image in product.images %}
+                                        {% set active = "" %}
+
+                                        {% if loop.index == 1 %}{% set active = "active" %}{% endif %}
+                                        <div class="col">
+                                            <img class="image-product border rounded cursor-pointer {{ active }}" src="{{ asset('images/product/') }}{{ image }}" width="80">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ product.name }}</h4>
+                                <div class="d-flex gap-3 py-3">
+                                    <div class="cursor-pointer">
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-secondary"></i>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+
+                                    {% if product.price %}
+                                        <span class="price h4">{{ product.price}}DH</span>
+                                        {% if product.compareAtPrice %}
+                                            <small><del class="m-l10">{{ product.compareAtPrice }}DH</del></small>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <p class="card-text fs-6">{{ product.description }}</p>
+                                <dl class="row">
+                                    <dt class="col-sm-3">{{ 'category'|trans }}</dt>
+                                    <dd class="col-sm-9">{{ product.category.name }}</dd>
+                                    <dt class="col-sm-3">{{ 'category'|trans }}</dt>
+                                    <dd class="col-sm-9">{{ product.subCategory.name|default('Empty'|trans) }}</dd>
+                                    <dt class="col-sm-3">{{ 'Product Type'|trans }}</dt>
+                                    <dd class="col-sm-9">{{ product.productType }} </dd>
+                                    <dt class="col-sm-3">{{ 'Delivery Time'|trans }}</dt>
+                                    <dd class="col-sm-9">{{ product.deliveryTime }} </dd>
+                                    <dt class="col-sm-3">{{ 'Expedition Country'|trans }}</dt>
+                                    <dd class="col-sm-9">{{ product.expeditionCountry }} </dd>
+                                    <dt class="col-sm-3">{{ 'Product Tags'|trans }}</dt>
+                                    <dd class="col-sm-9">{{ product.tags|replace({',':' | '})|default('Empty'|trans) }} </dd>
+
+                                </dl>
+                                <hr>
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <label class="form-label">{{ 'Variants'|trans }} ({{ 'Optional'|trans }})</label>
+                                        <div class="table-variants">
+                                            <table class="table mb-0">
+                                                <thead class="text-primary">
+                                                <tr>
+                                                    <th scope="col">{{ 'Unity'|trans }}</th>
+                                                    <th scope="col">{{ 'Price'|trans }}</th>
+                                                    <th scope="col">{{ 'Compare price'|trans }}</th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody >
+                                                    {% for variant in product.variants %}
+                                                        <tr>
+                                                            <td>{{ variant.unity }}</td>
+                                                            <td>{{ variant.price}}DH</td>
+                                                            <td>
+                                                                {% if product.compareAtPrice %}
+                                                                    <small><del>{{ variant.compareAtPrice }}DH</del></small>
+                                                                {% endif %}
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--end row-->
+
+
+
+
+    <div class="row row-cols-auto g-3">
+        <div class="col">
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{'Delete Confirm !'|trans}}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">{{ 'Do you really want to delete ?'|trans }}</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Close'|trans }}</button>
+                            <a href="#" id="linkDelete" type="button" class="btn btn-primary">{{ 'Delete'|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%  endblock %}
+
+{% block javascripts %}
+    <script>
+        $('.image-product').click(function () {
+
+            $('#show-img-product').attr('src',$(this).attr('src'));
+            console.log($(this).attr('src'))
+            $('.image-product').removeClass('active');
+            $(this).addClass('active');
+        })
+    </script>
+{% endblock %}

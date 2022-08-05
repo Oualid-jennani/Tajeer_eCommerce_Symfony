@@ -1,0 +1,97 @@
+<!-- Featured Products Start -->
+<section class="home_1_team home_5_team pb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="title">
+                    <h2>{{ 'New arrival'| trans }}</h2>
+                </div>
+            </div>
+            <div class="col-12 collection-product-wrapper">
+                <div class="product-five product-m no-arrow  product-wrapper-grid">
+                    {% for product in newArrival %}
+                        <div class="item">
+                        <div class="product-box">
+                            <div class="img-wrapper">
+                                <div class="front">
+                                    {% if product.productType != "Local" %}
+                                        <div class="sale">
+                                            <span class="site-button button-sm bg-info text-white">Expedie from {{ product.expeditionCountry }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <a href="#">
+                                        <img src="{{ asset('images/product/') }}{{ product.images[0] }}" class="img-fluid" alt="{{ product.name }}">
+                                    </a>
+                                    <div>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view" class="add_hover add_search" title="Quick View">
+                                            <i class="ti-search" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="#" title="Wish list" class="add_hover add_wish"><i class="ti-heart" aria-hidden="true"></i></a>
+                                        <a href="#" title="Add to cart" class="add_hover"><i class="ti-shopping-cart" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-detail">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <a href="{{ path('product',{'slug':product.slug}) }}"><h6>{{ product.name }}</h6></a>
+                                <p>
+                                    {{ product.name }}
+                                </p>
+                                <h4>{{ product.price |number_format(2)}} Dhs</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="product-five product-m no-arrow  product-wrapper-grid">
+                    {% for product in newArrival2 %}
+                        <div class="item">
+                        <div class="product-box">
+                            <div class="img-wrapper">
+                                <div class="front">
+                                    {% if product.productType != "Local" %}
+                                        <div class="sale">
+                                            <span class="site-button button-sm bg-info text-white">Expedie from {{ product.expeditionCountry }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <a href="#">
+                                        <img src="{{ asset('images/product/') }}{{ product.images[0] }}" class="img-fluid" alt="{{ product.name }}">
+                                    </a>
+                                    <div>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view" class="add_hover add_search" title="Quick View">
+                                            <i class="ti-search" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="#" title="Wish list" class="add_hover add_wish"><i class="ti-heart" aria-hidden="true"></i></a>
+                                        <a href="#" title="Add to cart" class="add_hover"><i class="ti-shopping-cart" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-detail">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <a href="{{ path('product',{'slug':product.slug}) }}"><h6>{{ product.name }}</h6></a>
+                                <p>
+                                    {{ product.name }}
+                                </p>
+                                <h4>{{ product.price |number_format(2)}} Dhs</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Featured Products End -->

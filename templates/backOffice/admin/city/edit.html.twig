@@ -1,0 +1,69 @@
+{% extends 'baseDash.html.twig' %}
+
+{% block title %}Cities | Edit{% endblock %}
+
+{% block body %}
+
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">{{ 'Cities'|trans }}</div>
+    </div>
+    <!--end breadcrumb-->
+    <div class="row">
+        <div class="col-xl-9 mx-auto">
+            <h6 class="mb-0 text-uppercase">{{ 'Edit City'|trans }}</h6>
+            <hr/>
+            <div class="card">
+                <div class="card-body">
+                    {% for type,messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }} border-0 bg-{{ type }} alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-white">
+                                        {% if type =="success" %}
+                                            <i class="bx bxs-check-circle"></i>
+                                        {% else %}
+                                            <i class="bx bxs-message-square-x"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-white">{{ type }}</h6>
+                                        <div class="text-white">{{ message }}</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    <div class="p-4 border rounded">
+                        {{ form_start(form ,{'attr':{'class':'row g-3 needs-validation','novalidate':''}}) }}
+
+                        <div class="col-md-12">
+                            <label for="validationCustom01" class="form-label">{{ 'Name'|trans }}</label>
+                            {{ form_widget(form.name) }}
+                            <div class="valid-feedback">{{ form_errors(form.name) }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationCustom01" class="form-label">{{ 'Country'|trans }}</label>
+                            {{ form_widget(form.country) }}
+                            <div class="valid-feedback">{{ form_errors(form.country) }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationCustom01" class="form-label">{{ 'Province'|trans }}</label>
+                            {{ form_widget(form.province) }}
+                            <div class="valid-feedback">{{ form_errors(form.province) }}</div>
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">{{ 'Save'|trans }}  <i class="bx bx-save"></i></button>
+                            <div class="spinner-border text-primary text-right" role="status"> <span class="visually-hidden">Loading...</span></div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+

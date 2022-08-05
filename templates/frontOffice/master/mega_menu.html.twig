@@ -1,0 +1,18 @@
+{% for category in categories %}
+    <div class="col-xl-3 ">
+        <div class="link-section">
+            <div class="menu-title">
+                <h5>{{ category.name }}</h5>
+            </div>
+            {% if category.subCategories is not empty %}
+            <div class="menu-content">
+                <ul>
+                    {% for subCategory in category.subCategories %}
+                    <li><a href="javascript:void(0)">{{ subCategory.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

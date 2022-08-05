@@ -1,0 +1,17 @@
+{% block category_slider_row %}
+    <tr class="slider">
+        <td>
+            {{ form_widget(form.brochure)}}
+            <div class="text-danger">{{ form_errors(form.brochure) }}</div>
+        </td>
+        <td>
+            {{ form_widget(form.url) }}
+            <div class="text-danger">{{ form_errors(form.url) }}</div>
+        </td>
+        <td>
+            <div class="text-end mt-2">
+                <a href="javascript:void(0)" class="remove-slider" class="text-primary"><i class="fa fa-trash-alt fs-4"></i></a>
+            </div>
+        </td>
+    </tr>
+{% endblock %}

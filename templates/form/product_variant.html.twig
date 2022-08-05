@@ -1,0 +1,21 @@
+{% block product_variant_row %}
+    <tr class="variant">
+        <td>
+            {{ form_widget(form.unity) }}
+            <div class="text-danger">{{ form_errors(form.unity) }}</div>
+        </td>
+        <td>
+            {{ form_widget(form.price) }}
+            <div class="text-danger">{{ form_errors(form.price) }}</div>
+        </td>
+        <td>
+            {{ form_widget(form.compareAtPrice) }}
+            <div class="text-danger">{{ form_errors(form.compareAtPrice) }}</div>
+        </td>
+        <td>
+            <div class="text-end mt-2">
+                <a href="javascript:void(0)" class="remove-variant" class="text-primary"><i class="fa fa-trash-alt fs-4"></i></a>
+            </div>
+        </td>
+    </tr>
+{% endblock %}

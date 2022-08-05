@@ -1,0 +1,41 @@
+{{ form_start(form,{'action': path('headerCart'), 'method': 'post'}) }}
+<div class="cart-box">
+    <i class="ti-shopping-cart-full"></i>
+    <div class="logo_content">
+        <h5 class="title">{{ 'Shoping Cart'|trans }}</h5>
+        <h6>
+            {% if app.session.get('CART')|default(null) %}
+                {{ app.session.get('CART').cartLines.count }}
+            {% else %}
+                0
+            {% endif %}
+            ITEM - {{ cart.total|number_format(2, ',', ' ') }}DH</h6>
+    </div>
+    {% if app.session.get('CART')|default(null) %}
+        {% if app.session.get('CART').cartLines.count > 0 %}
+            <ul class="shopping-cart">
+                {% for row in form.cartLines %}
+                    {{ form_row(row) }}
+                {% endfor %}
+                <li>
+                    <div>
+                        <button class="theme_btn" style="padding: 5px 10px;border-radius:0px">
+                            {{ 'Update Cart'|trans }}
+                            <span class="theme_btn_eff"></span>
+                        </button>
+                    </div>
+                </li>
+                <li>
+                    <div class="total">
+                        <h5>{{ 'subtotal'|trans }} : <span>{{ cart.total|number_format(2, ',', ' ') }}DH</span></h5>
+                    </div>
+                </li>
+                <li>
+                    <div class="buttons"><a href="{{ path('cart') }}" class="view-cart">{{ 'view cart'|trans }}</a> <a
+                                href="{{ path('checkout') }}" class="checkout">{{ 'checkout'|trans }}</a></div>
+                </li>
+            </ul>
+        {% endif %}
+    {% endif %}
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--favicon-->
+    <link rel="icon" href="{{ asset('dashAssets/images/favicon-32x32.png') }}" type="image/png" />
+
+    <title>{% block title %}Tajeer{% endblock %}</title>
+
+    <!--plugins-->
+    <link href="{{ asset('dashAssets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashAssets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashAssets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+    <!-- loader-->
+    <link href="{{ asset('dashAssets/css/pace.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('dashAssets/js/pace.min.js') }}"></script>
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('dashAssets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashAssets/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashAssets/css/icons.css') }}" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
+
+</head>
+
+
+<body class="bg-login">
+    {% block body %}
+    {% endblock %}
+<!--end switcher-->
+
+<script src="{{ asset('dashAssets/js/bootstrap.bundle.min.js') }}"></script>
+<!--plugins-->
+<script src="{{ asset('dashAssets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+<!--Password show & hide js -->
+<script>
+    $(document).ready(function () {
+        $("#show_hide_password a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#show_hide_password input').attr("type") == "text") {
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass("bx-hide");
+                $('#show_hide_password i').removeClass("bx-show");
+            } else if ($('#show_hide_password input').attr("type") == "password") {
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass("bx-hide");
+                $('#show_hide_password i').addClass("bx-show");
+            }
+        });
+    });
+</script>
+<!--app JS-->
+<script src="{{ asset('dashAssets/js/app.js') }}"></script>
+<script src="{{ asset('dashAssets/js/custom.js') }}"></script>
+<script>
+    new PerfectScrollbar('.customers-list');
+    new PerfectScrollbar('.store-metrics');
+    new PerfectScrollbar('.product-list');
+</script>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>

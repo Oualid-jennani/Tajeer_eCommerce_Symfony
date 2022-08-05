@@ -1,0 +1,15 @@
+.sale {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    z-index: 2;
+}
+
+.sale .site-button {
+    border-radius: 0px 10px 0 10px;
+    padding: 3px 10px;
+    font-size: 13px;
+}
+.paypal-button-container{
+    width: 100% !important;
+}

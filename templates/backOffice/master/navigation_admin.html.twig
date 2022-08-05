@@ -1,0 +1,82 @@
+<ul class="metismenu" id="menu">
+    <li>
+        <a href="{{ path('dashboard_admin') }}" class="has-arrow">
+            <div class="parent-icon"><i class='bx bx-home-circle'></i>
+            </div>
+            <div class="menu-title">Dashboard</div>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class='bx bx-current-location'></i></div>
+            <div class="menu-title">{{ 'Countries & Cities'|trans }}</div>
+        </a>
+        <ul>
+            <li> <a href="{{ path('admin_country') }}"><i class="bx bx-right-arrow-alt"></i>{{ 'Countries'|trans }}</a></li>
+            <li> <a href="{{ path('admin_province') }}"><i class="bx bx-right-arrow-alt"></i>{{ 'Provinces'|trans }}</a></li>
+            <li> <a href="{{ path('admin_city') }}"><i class="bx bx-right-arrow-alt"></i>{{ 'Cities'|trans }}</a></li>
+        </ul>
+    </li>
+    <li class="menu-label">{{ 'Seller'|trans }}</li>
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class='bx bxs-store-alt'></i>
+            </div>
+            <div class="menu-title">{{ 'Sellers'|trans }}</div>
+        </a>
+        <ul>
+            <li> <a href="{{ path('admin_sellers') }}"><i class="bx bx-right-arrow-alt"></i>{{ 'Sellers'|trans }}</a></li>
+        </ul>
+    </li>
+    <li>
+        <a class="has-arrow" href="javascript:;">
+            <div class="parent-icon"><i class='bx bx-category'></i>
+            </div>
+            <div class="menu-title">{{ 'Categories'|trans }}</div>
+        </a>
+        <ul>
+            <li> <a href="{{ path('admin_categories_list') }}"><i class="bx bx-right-arrow-alt"></i>{{ 'Categories'|trans }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a class="has-arrow" href="javascript:;">
+            <div class="parent-icon"><i class='bx bx-cart'></i>
+            </div>
+            <div class="menu-title">{{ 'Orders'|trans }}</div>
+        </a>
+        <ul>
+            <li> <a href="{{ path('admin_orders') }}"><i class="bx bx-right-arrow-alt"></i>{{ 'All Orders'|trans }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a class="has-arrow" href="javascript:;">
+            <div class="parent-icon"><i class='bx bx-category'></i>
+            </div>
+            <div class="menu-title">{{ 'Sliders'|trans }}</div>
+        </a>
+        <ul>
+            <li> <a href="{{ path('admin-sliders-list') }}"><i class="bx bx-right-arrow-alt"></i>{{ 'Sliders'|trans }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class='bx bx-package'></i>
+            </div>
+            <div class="menu-title">{{ 'Products'|trans }}</div>
+        </a>
+        <ul>
+            <li> <a href="{{ path('admin_exclusive_col_list') }}"><i class="bx bx-right-arrow-alt"></i>{{ 'Exclusive Collection'|trans }}</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="javascript:;" target="_blank">
+            <div class="parent-icon"><i class="bx bx-support"></i>
+            </div>
+            <div class="menu-title">Support</div>
+        </a>
+    </li>
+</ul>

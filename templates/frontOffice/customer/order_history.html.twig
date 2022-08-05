@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Account'|trans }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .order-history td,.order-history th{vertical-align: middle}
+        .my_theme_btn{padding: 5px 10px !important;;border-radius:0px !important;}
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <!-- News Start -->
+    <section class="home_1_news blog_side_sec cmn_bg">
+        <ul class="plus_decore">
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 blog_cat">
+                    <div class="blog_sidebar">
+                        <div class="blog_category">
+                            {% include "frontOffice/master/dashboardNav.html.twig" %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="blog-shadow">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table class="table order-history">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">{{ 'TrackNumber'|trans }}</th>
+                                            <th scope="col">{{ 'Order Date'|trans }}</th>
+                                            <th scope="col">{{ 'Total'|trans }}</th>
+                                            <th scope="col">{{ 'Detail'|trans }}</th>
+                                            <th scope="col">{{ 'Action'|trans }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for order in orders %}
+                                            <tr>
+                                                <td>{{ order.trackNumber }}</td>
+                                                <td>{{ order.orderDate | date('d/m/Y') }}</td>
+                                                <td>{{ order.total }}DH</td>
+
+                                                <td>
+                                                    <a href="{{ path('customer-orders-detail',{'trackNumber':order.trackNumber}) }}" class="text-warning">
+                                                        <i class="fa fa-eye fs-3"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ path('customer_order_again',{'trackNumber':order.trackNumber}) }}" class="theme_btn my_theme_btn" style="">
+                                                        {{ 'Order Again'|trans }}
+                                                        <span class="theme_btn_eff"></span>
+                                                    </a>
+                                                </td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- News Start -->
+
+{% endblock %}

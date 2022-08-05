@@ -1,0 +1,48 @@
+<div class="theme-tab">
+    <ul class="tabs tab-title">
+        <li class="current"><a href="tab-2">{{ 'Featured Products'|trans }}</a></li>
+    </ul>
+    <div class="tab-content-cls">
+        <div id="tab-2" class="tab-content active default">
+            <div class="product-5 product-m no-arrow">
+                {% for product in featureProducts %}
+                    <div class="product-box">
+                    <div class="img-wrapper">
+                        <div class="front">
+                            {% if product.productType != "Local" %}
+                                <div class="sale">
+                                    <span class="site-button button-sm bg-info text-white">Expedie from {{ product.expeditionCountry }}</span>
+                                </div>
+                            {% endif %}
+                            <a href="#">
+                                <img src="{{ asset('images/product/') }}{{ product.images[0] }}" class="img-fluid" alt="{{ product.name }}">
+                            </a>
+                            <div>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view" class="add_hover add_search" title="Quick View">
+                                    <i class="ti-search" aria-hidden="true"></i>
+                                </a>
+                                <a href="#" title="Wish list" class="add_hover add_wish"><i class="ti-heart" aria-hidden="true"></i></a>
+                                <a href="#" title="Add to cart" class="add_hover"><i class="ti-shopping-cart" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-detail">
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <a href="{{ path('product',{'slug':product.slug}) }}"><h6>{{ product.name }}</h6></a>
+                        <p>
+                            {{ product.description }}
+                        </p>
+                        <h4>{{ product.price |number_format(2)}} Dhs</h4>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

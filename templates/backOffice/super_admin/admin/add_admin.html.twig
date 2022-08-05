@@ -1,0 +1,82 @@
+{% extends 'baseDash.html.twig' %}
+
+{% block title %}Add Admin{% endblock %}
+
+{% block body %}
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Forms</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Validations</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+    <div class="row">
+        <div class="col-xl-9 mx-auto">
+            <h6 class="mb-0 text-uppercase">{{ 'Add Admin'|trans }}</h6>
+            <hr/>
+            <div class="card">
+                <div class="card-body">
+                    {% for type,messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }} border-0 bg-{{ type }} alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-white">
+                                        {% if type =="success" %}
+                                            <i class="bx bxs-check-circle"></i>
+                                        {% else %}
+                                            <i class="bx bxs-message-square-x"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-white">{{ type }}</h6>
+                                        <div class="text-white">{{ message }}</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    <div class="p-4 border rounded">
+                        {{ form_start(form ,{'attr':{'class':'row g-3 needs-validation','novalidate':''}}) }}
+
+                            <div class="col-md-6">
+                                <div class="text-danger">{{ form_errors(form.fullName) }}</div>
+                                <label for="validationCustom01" class="form-label">{{ 'FullName'|trans }}</label>
+                                {{ form_widget(form.fullName) }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustomUsername" class="form-label">{{ 'Username'|trans }}</label>
+                                <div class="input-group has-validation"> <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                    {{ form_widget(form.username) }}
+                                </div>
+                                <div class="text-danger">{{ form_errors(form.username) }}.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustom03" class="form-label">Email</label>
+                                {{ form_widget(form.email) }}
+                                <div class="text-danger">{{ form_errors(form.email) }}.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustom03" class="form-label">{{ 'Password'|trans }}</label>
+                                {{ form_widget(form.password) }}
+                                <div class="text-danger">{{ form_errors(form.password) }}</div>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-primary" type="submit">{{ 'Save'|trans }}  <i class="bx bx-save"></i></button>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--end row-->
+{% endblock %}

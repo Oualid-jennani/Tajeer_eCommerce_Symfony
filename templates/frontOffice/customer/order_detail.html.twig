@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Account'|trans }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .order-history td,.order-history th{vertical-align: middle}
+        .my_theme_btn{padding: 5px 10px !important;;border-radius:0px !important;}
+    </style>
+{% endblock %}
+
+
+
+{% block body %}
+
+    <!-- News Start -->
+    <section class="home_1_news blog_side_sec cmn_bg">
+        <ul class="plus_decore">
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 blog_cat">
+                    <div class="blog_sidebar">
+                        <div class="blog_category">
+                            {% include "frontOffice/master/dashboardNav.html.twig" %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="blog-shadow">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table class="table order-history">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">{{ 'image'|trans }}</th>
+                                            <th scope="col">{{ 'product name'|trans }}</th>
+                                            <th scope="col">{{ 'price'|trans }}</th>
+                                            <th scope="col">{{ 'quantity'|trans }}</th>
+                                            <th scope="col">{{ 'total'|trans }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for cart in order.carts %}
+                                            {% for line in cart.cartLines %}
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ asset('images/product/'~line.product.images[0]) }}" width="70px" height="70px" alt="">
+                                                    </td>
+                                                    <td>
+                                                        {{ line.product.name }}
+                                                        {% if not line.variant|default(null) %}
+                                                            | <small class="text-primary">{{ line.product.unity }}</small>
+                                                        {% endif %}
+                                                        DH
+                                                    </td>
+                                                    <td>
+                                                        {% if not line.variant|default(null) %}
+                                                            {{ line.product.price|number_format(2, ',', ' ') }}
+                                                        {% else %}
+                                                            {{ line.variant.price|number_format(2, ',', ' ') }}
+                                                        {% endif %}
+                                                        DH
+                                                    </td>
+                                                    <td>{{ line.quantity }}</td>
+                                                    <td>{{ line.total }} Dhs</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2" class="text-end">{{ 'SUBTOTAL'|trans }}</td>
+                                            <td class="text-start">{{ order.total }} Dhs</td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- News Start -->
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'baseDash.html.twig' %}
+
+{% block body %}
+
+    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+        <div class="col">
+            <div class="card radius-10 overflow-hidden bg-danger">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-white">Total Orders</p>
+                            <h5 class="mb-0 text-white">{{ orders | length}}</h5>
+                        </div>
+                        <div class="ms-auto text-white">	<i class='bx bx-cart font-30'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="" id="chart1"></div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 overflow-hidden bg-primary">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-white">Total Products</p>
+                            <h5 class="mb-0 text-white">{{ app.user.products.count }}</h5>
+                        </div>
+                        <div class="ms-auto text-white">	<i class='bx bx-wallet font-30'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="" id="chart2"></div>
+            </div>
+        </div>
+    </div><!--end row-->
+
+{% endblock %}

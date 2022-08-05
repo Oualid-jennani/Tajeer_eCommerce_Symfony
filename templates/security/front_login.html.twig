@@ -1,0 +1,46 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <!-- section start -->
+    <section class="login-page section-b-space cmn_bg_yellow">
+        <ul class="plus_decore">
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3>Login</h3>
+                    <div class="theme-card">
+                        <form class="theme-form" method="post">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+                            <div class="form-group">
+                                <label for="email" class="mb-3">{{ 'Username' |trans}}</label>
+                                <input type="text" class="form-control" name="_username" id="email" placeholder="Email" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="review" class="mb-3">{{ 'Password'|trans }}</label>
+                                <input type="password" class="form-control" name="_password" id="review" placeholder="Enter your password" required="">
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+                            <button class="btn btn-solid" id="mc-submitsa" type="submit">{{ "Subscribe"|trans }}</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6 right-login">
+                    <h3>{{ 'New Customer'|trans }}</h3>
+                    <div class="theme-card authentication-right">
+                        <h6 class="title-font">{{ 'Create A Account'|trans }}</h6>
+                        <a class="btn btn-solid" id="mc-submita" href="{{ path('app_register_customer') }}">create an account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section End -->
+{% endblock %}
+

@@ -1,0 +1,197 @@
+{% form_theme form _self %}
+{% extends 'base1.html.twig' %}
+
+{% block title %}Tajeer | {{ 'Checkout'|trans }}{% endblock %}
+
+{% block body %}
+	<!-- Breadcrumb Start -->
+	<div class="bread_crumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 sec_low">
+					<div class="functionalities">
+						<ul id="breadcrumb" class="breadcrumb">
+							<li><a title="Home" href="{{ path('index') }}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+							<li><strong><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ 'Checkout'|trans }}</strong></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="page-title">
+						<h2>{{ 'Checkout'|trans }} </h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcrumb Start -->
+
+	<!--section start-->
+	<section class="section-b-space cmn_bg checkout-page">
+
+		<div class="container padding-cls">
+			<div class="checkout-form">
+				{{ form_start(form) }}
+					<div class="row">
+						<div class="col-lg-6 col-sm-12 col-xs-12">
+							<div class="checkout-title">
+								<h3>{{ 'Billing Details'|trans }}</h3></div>
+							<div class="row check-out">
+
+								<div class="form-group col-md-6 col-sm-6">
+									<div class="text-danger">{{ form_errors(form.fullName)}}</div>
+									<label for="order_fullName">{{ 'Full Name'|trans }} *</label>
+									{{ form_widget(form.fullName) }}
+								</div>
+								<div class="form-group col-sm-6">
+									<div class="text-danger">{{ form_errors(form.phone)}}</div>
+									<label for="order_phone">{{ 'Mobile Phone'|trans }} *</label>
+									{{ form_widget(form.phone) }}
+								</div>
+
+								<div class="col-sm-6">
+									<div class="text-danger">{{ form_errors(form.country) }}</div>
+									<label class="form-label">{{ 'Country'|trans }}</label>
+									{{ form_widget(form.country) }}
+								</div>
+								<div class="col-sm-6">
+									<div class="text-danger">{{ form_errors(form.province) }}</div>
+									<label class="form-label">{{ 'Province'|trans }}</label>
+									{{ form_widget(form.province) }}
+								</div>
+								<div class="col-sm-6">
+									<div class="text-danger">{{ form_errors(form.city) }}</div>
+									<label class="form-label">{{ 'City'|trans }}</label>
+									{{ form_widget(form.city) }}
+								</div>
+
+								<div class="col-12">
+									<div class="text-danger">{{ form_errors(form.address) }}</div>
+									<label class="form-label">{{ 'Address'|trans }}</label>
+									{{ form_widget(form.address) }}
+								</div>
+
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-12 col-xs-12">
+							<div class="checkout-details">
+								<div class="order-box">
+									<div class="title-box">
+										<div>{{ 'Product'|trans }} <span>{{ 'Total'|trans }}</span></div>
+									</div>
+									<ul class="qty">
+										{% for line in cart.cartLines %}
+											<li>{{ line.product.name }} × {{ line.quantity }} <span>{{ line.total }}Dhs</span></li>
+										{% endfor %}
+									</ul>
+									<ul class="sub-total">
+										<li>{{ 'Shipping by'|trans }} <a href="www.gomassarshipping.ma" target="_blank">GoMassarShipping.ma</a></li>
+									</ul>
+									<ul class="total">
+										{% set fees = cart.total * tajeerFees / 100 %}
+										{% set TWF = cart.total + fees %}
+										<li>Tajeer {{ 'Fees'|trans }}<span class="count">{{ fees |number_format(2, ',', ' ') }} Dhs</span></li>
+									</ul>
+									<ul class="total">
+										<li>Total without fees <span class="count">{{ cart.total }} Dhs</span></li>
+										<li>Total <span class="count">{{ TWF |number_format(2, ',', ' ') }} Dhs</span></li>
+									</ul>
+								</div>
+								<div class="payment-box">
+									<div class="upper-box">
+										<div class="payment-options">
+											<ul>
+												<li>
+													<div class="radio-option">
+														<input type="radio" name="payment-group" id="payment-cod" value="cod" checked>
+														<label for="payment-cod">{{ 'Cash On Delivery'|trans }}</label>
+													</div>
+												</li>
+												<li>
+													<div class="radio-option paypal">
+														<input type="radio" name="payment-group" id="payment-paypal" value="paypal">
+														<label for="payment-paypal">{{ 'PayPal'|trans }}</label>
+													</div>
+												</li>
+												<li class="paypal-btn" style="display: none">
+													<div id="paypal-button-container" style="width: 100%;"></div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="text-end">
+										<button class="theme_btn" type="submit">
+											{{ 'Place Order'|trans }}
+											<span class="theme_btn_eff"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
+		<ul class="plus_decore">
+			<li></li>
+			<li></li>
+		</ul>
+	</section>
+	<!--section end-->
+
+
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		$('form input').on('change', function() {
+			$('input[name=payment-group]:checked','form').val() == "paypal" ?
+					$('.paypal-btn').css('display','block') :
+					$('.paypal-btn').css('display','none') ;
+		});
+	</script>
+	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+	<script>
+		paypal.Button.render({
+			env: 'sandbox', // sandbox | production
+			// Show the buyer a 'Pay Now' button in the checkout flow
+			commit: true,
+			style: {
+				label: 'pay',  // checkout | credit | pay | buynow | generic
+				size:  'responsive',// small | medium | large | responsive
+				fundingicons: true, // optional
+				branding: true, // optional
+				shape: 'pill',   // pill | rect
+				color: 'blue'   // gold | blue | silver | black
+			},
+			// payment() is called when the button is clicked
+			payment: function() {
+				// Set up a url on your server to create the payment
+				var CREATE_URL = '/paypal-create-payement';
+				// Make a call to your server to set up the payment
+				return paypal.request.post(CREATE_URL)
+						.then(function(res) {
+							console.log(res);
+							return res.result.id;
+						});
+			},
+			// onAuthorize() is called when the buyer approves the payment
+			onAuthorize: function(data, actions) {
+				console.log(data);
+				// Set up a url on your server to execute the payment
+				var EXECUTE_URL = '/paypal-capture-order';
+				// Set up the data you need to pass to your server
+				var data = {
+					paymentID: data.paymentID,
+					payerID: data.payerID
+				};
+				// Make a call to your server to execute the payment
+				return paypal.request.post(EXECUTE_URL, data)
+						.then(function (res) {
+							console.log(res);
+							$('#form-checkout').submit();
+						});
+			}
+		}, '#paypal-button-container');
+	</script>
+{% endblock %}

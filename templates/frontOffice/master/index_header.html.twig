@@ -1,0 +1,133 @@
+<!--Top-Section-->
+<div class="top-contact top-header commerce-layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 d-none d-md-block">
+                <ul class="top-header-left">
+                    <li>{{ 'Welcome to'|trans }} Tajeer.online</li>
+                    <li><a href="#" ></a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-6">
+                <ul class="top-header-right">
+                    <li>
+                        {% if app.user %}
+                            <a href="{{ path('dashboard') }}">{{ 'Dashboard'|trans }}</a>
+                        {% else %}
+                            <a href="{{ path('security_back_login') }}">{{ 'Seller'|trans }}</a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <a href="#" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                            Langue <i class="fa fa-angle-down"></i>
+                        </a>
+                        <div class="dropdown-menu default-dropdown" aria-labelledby="dropdownMenuButton">
+                            {% for locale in locales %}
+                                {%  if locale != app.request.locale  %}
+                                    <a href="{{ path('change_locale',{'locale':locale}) }}" class="dropdown-item">{{ locale }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </li>
+                    {% if not app.user %}
+                        <li><a href="{{ path('app_register_customer') }}">{{ 'Create Account'|trans }}</a></li>
+                    {% else %}
+                        <li>
+                            <a href="#" id="dropdownMenuButton2" data-bs-toggle="dropdown">
+                                {{ 'My Account'|trans }} <i class="fa fa-angle-down"></i>
+                            </a>
+                            <div class="dropdown-menu default-dropdown" aria-labelledby="dropdownMenuButton2">
+                                <a class="dropdown-item" href="{{ path('customer-account-info') }}">{{ 'Account Settings'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('customer-orders-history') }}">{{ 'Order History'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('security_logout') }}">{{ 'Logout'|trans }}</a>
+                            </div>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End-Top-Section-->
+
+<div class="main-header">
+
+    <!-- Logo & Btn Section Start -->
+    <div class="mid-header">
+        <div class="container">
+            <div class="row">
+                <div class=" col-3">
+                    <a href="{{ path('index') }}" class="brand-logo"><img src="{{ asset('assets/images/ecommerce/logo.png') }}" width="150" height="100" alt="logo"></a>
+                </div>
+                <div class="col-9">
+                    <div class="nav-section">
+                        <nav id="main-nav">
+                            <div class="toggle-nav">
+                                <i class="fa fa-bars sidebar-bar"></i>
+                            </div>
+                            <ul id="main-menu" class="sm pixelstrap sm-horizontal">
+                                <li>
+                                    <div class="mobile-back text-end">Back<i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+                                </li>
+                                <li>
+                                    <a href="{{ path('index') }}">{{ 'Home'|trans }}</a>
+                                </li>
+                                <li class="mega" >
+                                    <a href="#">{{ 'Mega menu'|trans }}</a>
+                                    <ul class="mega-menu full-mega-menu">
+                                        <li>
+                                            <div class="container">
+                                                <div class="row">
+                                                    {{ render(controller('App\\Controller\\DefaultController::categoriesSubCategories')) }}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- =========================== Cart Detail =================================== -->
+                    {{ render(controller('App\\Controller\\DefaultController::headerCart')) }}
+                    <!-- =========================== Cart Detail =================================== -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logo & Btn Section End -->
+
+    <div class="bottom-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 ecommerce-sidebar set-order-2">
+                    <button class="btn btn-block btn_inverse toggle-btn">
+                        <i class="fa fa-bars"></i>{{ 'Shop by category'|trans }}
+                    </button>
+                </div>
+                <div class="col-md-9 set-order-1">
+                    <form class="ecommerce-from" action="{{ path('shop') }}" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="productName" aria-label="Amount (to the nearest dollar)" placeholder="{{ 'Search Products'|trans }}...">
+                            <div class="input-group-append selective">
+                                <select name="category" id="collection-option" data-option="collection-option" class="single-option-selector">
+                                    <option value="all" selected>{{ 'All Categories'|trans }}</option>
+                                    {{ render(controller('App\\Controller\\DefaultController::searchCategories')) }}
+                                </select>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn_inverse" type="submit"> {{ 'Search'|trans }} <i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                    {% if not app.user %}
+                        <a class="btn btn_white" href="{{ path('security_login') }}"><i class="fa fa-user-o"></i>
+                            {{ 'Login'|trans }} </a>
+                    {% else %}
+                        <a href="{{ path('customer-account-info') }}"></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

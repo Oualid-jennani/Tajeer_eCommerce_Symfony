@@ -1,0 +1,31 @@
+{% block _cart_header_cartLines_entry_row %}
+    {% set line = form.vars.value %}
+    <li>
+        <div class="media d-flex">
+            <a href="#"><img class="me-3" src="{{ asset('images/product/'~line.product.images[0]) }}"
+                            width="80px" alt="Generic placeholder image"></a>
+            <div class="media-body">
+                <a href="javascript:void(0)">
+                    <h5>{{ line.product.name }}</h5>
+                </a>
+                <h5>
+					<span>
+						{{ line.quantity }}
+						x
+						{% if not line.variant|default(null) %}
+                            {{ line.product.price|number_format(2, ',', ' ') }}
+                        {% else %}
+                            {{ line.variant.price|number_format(2, ',', ' ') }}
+                        {% endif %}
+						DH
+					</span>
+                </h5>
+
+                {{ form_widget(form.quantity, {'attr': {'class':'form-control mt-1 input-number','min':'1'}}) }}
+            </div>
+        </div>
+        <div class="close-circle"><a href="javascript:void(0)" class="delete-line"><i class="fa fa-times"
+                                                                                      aria-hidden="true"></i></a></div>
+    </li>
+
+{% endblock %}

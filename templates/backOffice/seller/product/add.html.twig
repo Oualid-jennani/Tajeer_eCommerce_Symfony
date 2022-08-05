@@ -1,0 +1,207 @@
+{% form_theme form _self %}
+{% extends 'baseDash.html.twig' %}
+{% block body %}
+
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">{{ 'Products'|trans }}</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ 'New Product'|trans }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+
+    <div class="card">
+        <div class="card-body p-4">
+            {% for type,messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }} border-0 bg-{{ type }} alert-dismissible fade show py-2">
+                        <div class="d-flex align-items-center">
+                            <div class="font-35 text-white">
+                                {% if type =="success" %}
+                                    <i class="bx bxs-check-circle"></i>
+                                {% else %}
+                                    <i class="bx bxs-message-square-x"></i>
+                                {% endif %}
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0 text-white">{{ type }}</h6>
+                                <div class="text-white">{{ message }}</div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            <h5 class="card-title text-primary">{{ 'Add New Product'|trans }}</h5>
+            <hr/>
+            {{ form_start(form,{'attr':{'class':'needs-validation clearfix'}}) }}
+            <div class="form-body mt-4">
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="border border-3 p-4 rounded">
+                            <div class="mb-3">
+                                <label for="" class="form-label">{{ 'Product Title'|trans }}</label>
+                                {{ form_widget(form.name, {'attr':{'class':'form-control','placeholder':''}}) }}
+                                <div class="text-danger">{{ form_errors(form.name)}}</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">{{ 'Description'|trans }}</label>
+                                {{ form_widget(form.description, {'attr':{'class':'form-control','placeholder':'','rows':'3'}}) }}
+                                <div class="text-danger">{{ form_errors(form.description)}}</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="" class="form-label">{{ 'Product Images'|trans }}</label>
+                                <div class="text-danger">{{ form_errors(form.brochures)}}</div>
+                                {{ form_widget(form.brochures) }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">{{ 'Product Video'|trans }} ({{ 'Optional'|trans }})</label>
+                                {{ form_widget(form.video, {'attr':{'class':'form-control','placeholder':''}}) }}
+                                <div class="text-danger">{{ form_errors(form.video)}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="border border-3 p-4 rounded">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="" class="form-label">{{ 'Price'|trans }}</label>
+                                    {{ form_widget(form.price, {'attr':{'class':'form-control','placeholder':'00.00'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.price)}}</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="" class="form-label">{{ 'Compare at Price'|trans }}</label>
+                                    {{ form_widget(form.compareAtPrice, {'attr':{'class':'form-control','placeholder':'00.00'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.compareAtPrice)}}</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="" class="form-label">{{ 'Category'|trans }}</label>
+                                    {{ form_widget(form.category, {'attr':{'class':'form-select'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.category)}}</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="" class="form-label">{{ 'Sub Category'|trans }}</label>
+                                    <div class="spinner-load">
+                                        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+                                    </div>
+                                    {{ form_widget(form.subCategory, {'attr':{'class':'form-select'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.subCategory)}}</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="" class="form-label">{{ 'Product Type'|trans }}</label>
+                                    {{ form_widget(form.productType, {'attr':{'class':'form-select'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.productType)}}</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="" class="form-label">{{ 'Delivery Time'|trans }}</label>
+                                    {{ form_widget(form.deliveryTime) }}
+                                    <div class="text-danger">{{ form_errors(form.deliveryTime)}}</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="" class="form-label">{{ 'Expedition Country'|trans }}</label>
+                                    {{ form_widget(form.expeditionCountry) }}
+                                    <div class="text-danger">{{ form_errors(form.expeditionCountry)}}</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="" class="form-label">{{ 'Product Tags'|trans }} ({{ 'Optional'|trans }})</label>
+                                    {{ form_widget(form.tags, {'attr':{'class':'form-control','data-role':'tagsinput','placeholder':'Enter Product Tags'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.tags)}}</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="" class="form-label">{{ 'Variants'|trans }} ({{ 'Optional'|trans }})</label>
+
+                                    <div class="table-variants">
+                                        <table class="table mb-0">
+                                            <thead class="text-primary">
+                                            <tr>
+                                                <th scope="col">{{ 'Unity'|trans }}</th>
+                                                <th scope="col">{{ 'Price'|trans }}</th>
+                                                <th scope="col">{{ 'Compare price'|trans }}</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="variants" id="variants" data-length="{{ form.variants|length }}" >
+                                                {{ form_row(form.variants) }}
+                                            </tbody>
+                                        </table>
+
+
+                                        <div class="m-3 text-center">
+                                            <a href="javascript:void(0)" id="add-variant" class="text-primary"><i class="fa fa-plus fs-2"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">{{ 'Save'|trans }} <i class="fa fa-save m-l10"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end row-->
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{%  endblock %}
+
+
+{% block javascripts %}
+
+    <script src="{{ asset('dashAssets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
+    <script src="{{ asset('dashAssets/plugins/select2/js/select2.min.js') }}"></script>
+    <script>
+
+        $('#product_brochures').imageuploadify();
+
+        $('.single-select').select2({
+            theme: 'bootstrap4',
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            allowClear: Boolean($(this).data('allow-clear')),
+        });
+
+        $('#add-variant').on('click', function () {
+            var count = $('#variants').data('length');
+            let prototype = $('#product_variants').data('prototype');
+            count++;
+            prototype = prototype.replace(/__name__/g, count);
+            $('#variants').append(prototype);
+            $('#variants').data('length', count);
+
+            $('.single-select').select2({
+                theme: 'bootstrap4',
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                allowClear: Boolean($(this).data('allow-clear')),
+            });
+
+            $('.remove-variant').on('click',function () {
+                $(this).parents("tr").remove();
+            })
+
+        });
+
+    </script>
+{% endblock %}
+
+{% block form_row %}
+    {{ form_widget(form) }}
+{% endblock %}

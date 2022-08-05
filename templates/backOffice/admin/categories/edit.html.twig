@@ -1,0 +1,1216 @@
+{% extends 'baseDash.html.twig' %}
+
+{% block body %}
+
+	<!--breadcrumb-->
+	<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+		<div class="breadcrumb-title pe-3">{{ 'Category'|trans }}</div>
+		<div class="ps-3">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb mb-0 p-0">
+					<li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="bx bx-home-alt"></i></a>
+					</li>
+					<li class="breadcrumb-item active" aria-current="page">{{ 'Edit'|trans }}</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	<!--end breadcrumb-->
+	<div class="row">
+		<div class="col-xl-10 mx-auto">
+			<div class="card">
+				<div class="card-body">
+					{% for type,messages in app.flashes %}
+						{% for message in messages %}
+							<div class="alert alert-{{ type }} border-0 bg-{{ type }} alert-dismissible fade show py-2">
+								<div class="d-flex align-items-center">
+									<div class="font-35 text-white">
+										{% if type =="success" %}
+											<i class="bx bxs-check-circle"></i>
+										{% else %}
+											<i class="bx bxs-message-square-x"></i>
+										{% endif %}
+									</div>
+									<div class="ms-3">
+										<h6 class="mb-0 text-white">{{ type }}</h6>
+										<div class="text-white">{{ message }}</div>
+									</div>
+								</div>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+						{% endfor %}
+					{% endfor %}
+					<div class="card-title d-flex align-items-center">
+						<div><i class="bx bxs-user me-1 font-22 text-primary"></i>
+						</div>
+						<h5 class="mb-0 text-primary">{{ 'Edit Category'|trans }}</h5>
+					</div>
+					<hr>
+					{{ form_start(form,{'attr':{'class':'needs-validation clearfix'}}) }}
+					<div class="col-md-12">
+						<div class="col-12">
+							<div class="row">
+								<div class="col-md-12 mb-2">
+									<label for="inputName" class="form-label">{{ 'Name'|trans }}</label>
+									{{ form_widget(form.name, {'attr':{'class':'form-control'}}) }}
+									<div class="text-danger">{{ form_errors(form.name) }}</div>
+								</div>
+								<div class="col-12 mb-2">
+									<label for="inputName" class="form-label">{{ 'Choose a Icons Category'|trans }}</label>
+									<div class="accordion" id="accordionExample">
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="headingOne">
+												<button class="accordion-button" type="button" data-bs-toggle="collapse"
+														data-bs-target="#collapseOne" aria-expanded="true"
+														aria-controls="collapseOne">
+													Icons
+												</button>
+											</h2>
+											<div id="collapseOne" class="accordion-collapse collapse show"
+												 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+												<div class="accordion-body">
+													<!-- Icons -->
+													<div style="max-height: 200px" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-5 g-3 overflow-auto">
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-agenda"></i>
+																</div>
+																<div class="ms-2"><span>agenda</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-ambulance"></i>
+																</div>
+																<div class="ms-2"><span>ambulance</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-android"></i>
+																</div>
+																<div class="ms-2"><span>android</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-android-original"></i>
+																</div>
+																<div class="ms-2"><span>android-original</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-angellist"></i>
+																</div>
+																<div class="ms-2"><span>angellist</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-apartment"></i>
+																</div>
+																<div class="ms-2"><span>apartment</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-app-store"></i>
+																</div>
+																<div class="ms-2"><span>app-store</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-apple"></i>
+																</div>
+																<div class="ms-2"><span>apple</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-archive"></i>
+																</div>
+																<div class="ms-2"><span>archive</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-baloon"></i>
+																</div>
+																<div class="ms-2"><span>baloon</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bar-chart"></i>
+																</div>
+																<div class="ms-2"><span>bar-chart</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-basketball"></i>
+																</div>
+																<div class="ms-2"><span>basketball</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bi-cycle"></i>
+																</div>
+																<div class="ms-2"><span>bi-cycle</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bitbucket"></i>
+																</div>
+																<div class="ms-2"><span>bitbucket</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-blackboard"></i>
+																</div>
+																<div class="ms-2"><span>blackboard</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bluetooth"></i>
+																</div>
+																<div class="ms-2"><span>bluetooth</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bolt"></i>
+																</div>
+																<div class="ms-2"><span>bolt</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-book"></i>
+																</div>
+																<div class="ms-2"><span>book</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bookmark"></i>
+																</div>
+																<div class="ms-2"><span>bookmark</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bookmark-alt"></i>
+																</div>
+																<div class="ms-2"><span>bookmark-alt</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bricks"></i>
+																</div>
+																<div class="ms-2"><span>bricks</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bridge"></i>
+																</div>
+																<div class="ms-2"><span>bridge</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-briefcase"></i>
+																</div>
+																<div class="ms-2"><span>briefcase</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-brush"></i>
+																</div>
+																<div class="ms-2"><span>brush</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-brush-alt"></i>
+																</div>
+																<div class="ms-2"><span>brush-alt</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bulb"></i>
+																</div>
+																<div class="ms-2"><span>bulb</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bullhorn"></i>
+																</div>
+																<div class="ms-2"><span>bullhorn</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-burger"></i>
+																</div>
+																<div class="ms-2"><span>burger</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-bus"></i>
+																</div>
+																<div class="ms-2"><span>bus</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-cake"></i>
+																</div>
+																<div class="ms-2"><span>cake</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-camera"></i>
+																</div>
+																<div class="ms-2"><span>camera</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-candy"></i>
+																</div>
+																<div class="ms-2"><span>candy</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-candy-cane"></i>
+																</div>
+																<div class="ms-2"><span>candy-cane</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-capsule"></i>
+																</div>
+																<div class="ms-2"><span>capsule</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-car"></i>
+																</div>
+																<div class="ms-2"><span>car</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-car-alt"></i>
+																</div>
+																<div class="ms-2"><span>car-alt</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-caravan"></i>
+																</div>
+																<div class="ms-2"><span>caravan</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-cart"></i>
+																</div>
+																<div class="ms-2"><span>cart</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-cart-full"></i>
+																</div>
+																<div class="ms-2"><span>cart-full</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-chef-hat"></i>
+																</div>
+																<div class="ms-2"><span>chef-hat</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-coffee-cup"></i>
+																</div>
+																<div class="ms-2"><span>coffee-cup</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-cog"></i>
+																</div>
+																<div class="ms-2"><span>cog</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-cogs"></i>
+																</div>
+																<div class="ms-2"><span>cogs</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-compass"></i>
+																</div>
+																<div class="ms-2"><span>compass</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-construction"></i>
+																</div>
+																<div class="ms-2"><span>construction</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-construction-hammer"></i>
+																</div>
+																<div class="ms-2"><span>construction-hammer</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-control-panel"></i>
+																</div>
+																<div class="ms-2"><span>control-panel</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-crown"></i>
+																</div>
+																<div class="ms-2"><span>crown</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-cup"></i>
+																</div>
+																<div class="ms-2"><span>cup</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-cut"></i>
+																</div>
+																<div class="ms-2"><span>cut</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-delivery"></i>
+																</div>
+																<div class="ms-2"><span>delivery</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-diamond"></i>
+																</div>
+																<div class="ms-2"><span>diamond</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-diamond-alt"></i>
+																</div>
+																<div class="ms-2"><span>diamond-alt</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-diners-club"></i>
+																</div>
+																<div class="ms-2"><span>diners-club</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-dinner"></i>
+																</div>
+																<div class="ms-2"><span>dinner</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-display"></i>
+																</div>
+																<div class="ms-2"><span>display</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-display-alt"></i>
+																</div>
+																<div class="ms-2"><span>display-alt</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-eraser"></i>
+																</div>
+																<div class="ms-2"><span>eraser</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-first-aid"></i>
+																</div>
+																<div class="ms-2"><span>first-aid</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-fresh-juice"></i>
+																</div>
+																<div class="ms-2"><span>fresh-juice</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-game"></i>
+																</div>
+																<div class="ms-2"><span>game</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-gift"></i>
+																</div>
+																<div class="ms-2"><span>gift</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-headphone"></i>
+																</div>
+																<div class="ms-2"><span>headphone</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-headphone-alt"></i>
+																</div>
+																<div class="ms-2"><span>headphone-alt</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-heart"></i>
+																</div>
+																<div class="ms-2"><span>heart</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-heart-filled"></i>
+																</div>
+																<div class="ms-2"><span>heart-filled</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-heart-monitor"></i>
+																</div>
+																<div class="ms-2"><span>heart-monitor</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-helicopter"></i>
+																</div>
+																<div class="ms-2"><span>helicopter</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-helmet"></i>
+																</div>
+																<div class="ms-2"><span>helmet</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-highlight"></i>
+																</div>
+																<div class="ms-2"><span>highlight</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-highlight-alt"></i>
+																</div>
+																<div class="ms-2"><span>highlight-alt</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-home"></i>
+																</div>
+																<div class="ms-2"><span>home</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-invention"></i>
+																</div>
+																<div class="ms-2"><span>invention</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-juice"></i>
+																</div>
+																<div class="ms-2"><span>juice</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-laptop"></i>
+																</div>
+																<div class="ms-2"><span>laptop</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-laptop-phone"></i>
+																</div>
+																<div class="ms-2"><span>laptop-phone</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-life-ring"></i>
+																</div>
+																<div class="ms-2"><span>life-ring</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-lock-alt"></i>
+																</div>
+																<div class="ms-2"><span>lock-alt</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-microphone"></i>
+																</div>
+																<div class="ms-2"><span>microphone</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-microscope"></i>
+																</div>
+																<div class="ms-2"><span>microscope</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-mobile"></i>
+																</div>
+																<div class="ms-2"><span>mobile</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-mouse"></i>
+																</div>
+																<div class="ms-2"><span>mouse</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-music"></i>
+																</div>
+																<div class="ms-2"><span>music</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-package"></i>
+																</div>
+																<div class="ms-2"><span>package</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-paint-bucket"></i>
+																</div>
+																<div class="ms-2"><span>paint-bucket</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-paint-roller"></i>
+																</div>
+																<div class="ms-2"><span>paint-roller</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-pallet"></i>
+																</div>
+																<div class="ms-2"><span>pallet</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-paperclip"></i>
+																</div>
+																<div class="ms-2"><span>paperclip</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-patreon"></i>
+																</div>
+																<div class="ms-2"><span>patreon</span>
+																</div>
+															</div>
+														</div>
+
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-pencil"></i>
+																</div>
+																<div class="ms-2"><span>pencil</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-pencil-alt"></i>
+																</div>
+																<div class="ms-2"><span>pencil-alt</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-phone"></i>
+																</div>
+																<div class="ms-2"><span>phone</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-phone-set"></i>
+																</div>
+																<div class="ms-2"><span>phone-set</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-pizza"></i>
+																</div>
+																<div class="ms-2"><span>pizza</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-plane"></i>
+																</div>
+																<div class="ms-2"><span>plane</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-play"></i>
+																</div>
+																<div class="ms-2"><span>play</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-plug"></i>
+																</div>
+																<div class="ms-2"><span>plug</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-plus"></i>
+																</div>
+																<div class="ms-2"><span>plus</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-pointer"></i>
+																</div>
+																<div class="ms-2"><span>pointer</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-printer"></i>
+																</div>
+																<div class="ms-2"><span>printer</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-restaurant"></i>
+																</div>
+																<div class="ms-2"><span>restaurant</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-school-bench-alt"></i>
+																</div>
+																<div class="ms-2"><span>school-bench-alt</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-scooter"></i>
+																</div>
+																<div class="ms-2"><span>scooter</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-service"></i>
+																</div>
+																<div class="ms-2"><span>service</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-shopping-basket"></i>
+																</div>
+																<div class="ms-2"><span>shopping-basket</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-shovel"></i>
+																</div>
+																<div class="ms-2"><span>shovel</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-signal"></i>
+																</div>
+																<div class="ms-2"><span>signal</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-skipping-rope"></i>
+																</div>
+																<div class="ms-2"><span>skipping-rope</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-sthethoscope"></i>
+																</div>
+																<div class="ms-2"><span>sthethoscope</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-sun"></i>
+																</div>
+																<div class="ms-2"><span>sun</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-surf-board"></i>
+																</div>
+																<div class="ms-2"><span>surf-board</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-tab"></i>
+																</div>
+																<div class="ms-2"><span>tab</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-taxi"></i>
+																</div>
+																<div class="ms-2"><span>taxi</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-trash"></i>
+																</div>
+																<div class="ms-2"><span>trash</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-video"></i>
+																</div>
+																<div class="ms-2"><span>video</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-volume-high"></i>
+																</div>
+																<div class="ms-2"><span>volume-high</span>
+																</div>
+															</div>
+														</div>
+														<div class="col">
+															<div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+																<div class="font-22 text-primary"><i
+																			class="lni lni-wheelbarrow"></i>
+																</div>
+																<div class="ms-2"><span>wheelbarrow</span>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<button type="submit" class="btn btn-primary float-end px-5">{{ 'Save'|trans }} <i class="fa fa-save ms-2"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--end row-->
+{%  endblock %}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--favicon-->
+    <link rel="icon" href="{{ asset('dashAssets/images/favicon-32x32.png') }}" type="image/png" />
+
+    <title>{% block title %}Tajeer{% endblock %}</title>
+
+    <!--plugins-->
+    <link href="{{ asset('dashAssets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashAssets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashAssets/plugins/highcharts/css/highcharts.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashAssets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashAssets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashAssets/iconic-fonts/font-awesome/css/all.min.css') }}" rel="stylesheet">
+
+
+    <link href="{{ asset('dashAssets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashAssets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
+
+    <link href="{{ asset('dashAssets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashAssets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
+
+
+
+    <!-- loader-->
+    <link href="{{ asset('dashAssets/css/pace.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('dashAssets/js/pace.min.js') }}"></script>
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('dashAssets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashAssets/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashAssets/css/icons.css') }}" rel="stylesheet">
+    <!-- Theme Style CSS -->
+    <link rel="stylesheet" href="{{ asset('dashAssets/css/dark-theme.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dashAssets/css/semi-dark.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dashAssets/css/header-colors.css') }}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/whatsapp-widget@1.2.0/dist/css/whatsapp-widget.min.css">
+
+    {% block stylesheets %}{% endblock %}
+
+</head>
+
+
+<body>
+
+<div class="wrapper">
+
+    <!--sidebar wrapper -->
+    <div class="sidebar-wrapper" data-simplebar="true">
+        <div class="sidebar-header">
+            <div>
+                <img src="{{ asset('dashAssets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
+            </div>
+            <div>
+                <h4 class="logo-text">Tajeer Dashboard</h4>
+            </div>
+            <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
+            </div>
+        </div>
+        <!--navigation-->
+        {% if is_granted('ROLE_ADMIN') %}
+            {% include "backOffice/master/navigation_admin.html.twig" %}
+        {% elseif  is_granted('ROLE_SUPER_ADMIN') %}
+            {% include "backOffice/master/navigation_super_admin.html.twig" %}
+        {% elseif  is_granted('ROLE_SELLER') %}
+            {% include "backOffice/master/navigation_seller.html.twig" %}
+        {% endif %}
+
+        <!--end navigation-->
+    </div>
+    <!--end sidebar wrapper -->
+
+    <!--start header -->
+    <header>
+        <!-- navbar -->
+        <div class="topbar d-flex align-items-center">
+            {% if is_granted('ROLE_ADMIN') %}
+                {% include "backOffice/master/navBar_admin.html.twig" %}
+            {% elseif  is_granted('ROLE_SUPER_ADMIN') %}
+                {% include "backOffice/master/navBar_super_admin.html.twig" %}
+            {% elseif  is_granted('ROLE_SELLER') %}
+                {% include "backOffice/master/navBar_seller.html.twig" %}
+            {% endif %}
+        </div>
+        <!-- end Navbar -->
+    </header>
+
+
+    <!--end header -->
+
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            {% block body %}
+
+            {% endblock %}
+            <form id="whatsapp" class="wa-widget" action="00212601249246" data-chat="whatsapp"></form>
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <footer class="page-footer">
+        <p class="mb-0">Copyright © 2021. All right reserved.</p>
+    </footer>
+</div>
+
+<style>
+        .wa-widget{
+            margin-bottom:20px !important;
+        }
+        .chat-content {
+            height: 100px !important;
+            margin-left: 0px !important;
+        }
+        .chat-header {
+            position: relative !important;
+            left: 0!important;
+        }
+        .wa-widget-toggle{
+            justify-content: center !important;
+        }
+    </style>
+    
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/whatsapp-widget@1.2.0/dist/js/whatsapp-widget.min.js"></script>
+    <script>
+
+
+        var chat = new WhatsAppWidget(document.getElementById('whatsapp'), {
+            name: 'Yassine',
+            division: '',
+            photo: 'https://tajeer.online/assets/images/ecommerce/logo.png',
+            introduction: 'Bonjour, comment pouvons-nous vous aider ?'
+        }, [{
+            data: 'name',
+            type: 'text',
+            required: true
+        }, {
+            data: 'email',
+            type: 'email',
+            required: true
+        }, {
+            data: 'message',
+            type: 'text',
+            required: true
+        }]);
+    </script>
+    
+    <script>
+        var b = document.getElementsByClassName("wa-widget-toggle");
+        var g = document.createElement('img');
+        g.setAttribute("src", "https://cdn-icons-png.flaticon.com/512/174/174879.png");
+        g.setAttribute("width", "32");
+        g.setAttribute("height", "32");
+        b[0].appendChild(g);
+        
+    </script>
+
+
+{#<!--start switcher-->#}
+{#<div class="switcher-wrapper">#}
+{#    <div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>#}
+{#    </div>#}
+{#    <div class="switcher-body">#}
+{#        <div class="d-flex align-items-center">#}
+{#            <h5 class="mb-0 text-uppercase">Theme Customizer</h5>#}
+{#            <button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>#}
+{#        </div>#}
+{#        <hr/>#}
+{#        <h6 class="mb-0">Theme Styles</h6>#}
+{#        <hr/>#}
+{#        <div class="d-flex align-items-center justify-content-between">#}
+{#            <div class="form-check">#}
+{#                <input class="form-check-input" type="radio" name="flexRadioDefault" id="lightmode" checked>#}
+{#                <label class="form-check-label" for="lightmode">Light</label>#}
+{#            </div>#}
+{#            <div class="form-check">#}
+{#                <input class="form-check-input" type="radio" name="flexRadioDefault" id="darkmode">#}
+{#                <label class="form-check-label" for="darkmode">Dark</label>#}
+{#            </div>#}
+{#            <div class="form-check">#}
+{#                <input class="form-check-input" type="radio" name="flexRadioDefault" id="semidark">#}
+{#                <label class="form-check-label" for="semidark">Semi Dark</label>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr/>#}
+{#        <div class="form-check">#}
+{#            <input class="form-check-input" type="radio" id="minimaltheme" name="flexRadioDefault">#}
+{#            <label class="form-check-label" for="minimaltheme">Minimal Theme</label>#}
+{#        </div>#}
+{#        <hr/>#}
+{#        <h6 class="mb-0">Header Colors</h6>#}
+{#        <hr/>#}
+{#        <div class="header-colors-indigators">#}
+{#            <div class="row row-cols-auto g-3">#}
+{#                <div class="col">#}
+{#                    <div class="indigator headercolor1" id="headercolor1"></div>#}
+{#                </div>#}
+{#                <div class="col">#}
+{#                    <div class="indigator headercolor2" id="headercolor2"></div>#}
+{#                </div>#}
+{#                <div class="col">#}
+{#                    <div class="indigator headercolor3" id="headercolor3"></div>#}
+{#                </div>#}
+{#                <div class="col">#}
+{#                    <div class="indigator headercolor4" id="headercolor4"></div>#}
+{#                </div>#}
+{#                <div class="col">#}
+{#                    <div class="indigator headercolor5" id="headercolor5"></div>#}
+{#                </div>#}
+{#                <div class="col">#}
+{#                    <div class="indigator headercolor6" id="headercolor6"></div>#}
+{#                </div>#}
+{#                <div class="col">#}
+{#                    <div class="indigator headercolor7" id="headercolor7"></div>#}
+{#                </div>#}
+{#                <div class="col">#}
+{#                    <div class="indigator headercolor8" id="headercolor8"></div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#<!--end switcher-->#}
+
+<!-- Bootstrap JS -->
+<script src="{{ asset('dashAssets/js/bootstrap.bundle.min.js') }}"></script>
+<!--plugins-->
+<script src="{{ asset('dashAssets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/highcharts/js/highcharts.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/highcharts/js/exporting.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/highcharts/js/variable-pie.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/highcharts/js/export-data.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/highcharts/js/accessibility.js') }}"></script>
+<!--<script src="{{ asset('dashAssets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>-->
+<link href="{{ asset('dashAssets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+<script src="{{ asset('dashAssets/plugins/input-tags/js/tagsinput.js') }}"></script>
+<script src="{{ asset('dashAssets/js/index.js') }}"></script>
+<script src="{{ asset('dashAssets/js/custom.js') }}"></script>
+<!--app JS-->
+<script src="{{ asset('dashAssets/js/app.js') }}"></script>
+<script>
+    new PerfectScrollbar('.customers-list');
+    new PerfectScrollbar('.store-metrics');
+    new PerfectScrollbar('.product-list');
+</script>
+
+<script src="{{ asset('dashAssets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('dashAssets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+<script src="{{ asset('dashAssets/js/app.js') }}"></script>
+<script src="{{ asset('dashAssets/js/myScript.js') }}"></script>
+
+
+
+
+<script>
+    $('#example').DataTable();
+</script>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>

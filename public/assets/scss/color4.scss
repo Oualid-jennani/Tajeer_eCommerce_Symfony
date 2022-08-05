@@ -1,0 +1,15 @@
+@import 'base/variable';
+$primary_color: #e1444b;
+$secondary_color: #0d237d;
+$color_tundora : $secondary_color;
+$header_color : $secondary_color;
+$news_sec: darken($secondary_color , 5%);
+$foter_color: darken($secondary_color , 5%);
+$new_back : $secondary_color;
+$color_down : $secondary_color;
+$black : $secondary_color;
+
+@import 'base/style';
+@import 'base/menu';
+@import 'base/responsive';
+

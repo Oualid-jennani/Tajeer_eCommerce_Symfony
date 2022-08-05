@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Account'|trans }}{% endblock %}
+
+{% block body %}
+
+	<!-- News Start -->
+	<section class="home_1_news blog_side_sec cmn_bg">
+		<ul class="plus_decore">
+			<li></li>
+			<li></li>
+		</ul>{{ '' }}
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 blog_cat">
+					<div class="blog_sidebar">
+						<div class="blog_category">
+							{% include "frontOffice/master/dashboardNav.html.twig" %}
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-9">
+					<div class="blog-shadow">
+						<div class="row">
+							<div class="col-lg-12">
+								<h3>{{ 'account settings'|trans }}</h3>
+								{{ form_start(form,{'attr':{'class':'theme-form'}}) }}
+								<div class="theme-card">
+									<div class="form-row row g-3">
+										<div class="col-sm-6">
+											<div class="text-danger">{{ form_errors(form.username) }}</div>
+											<label class="form-label">{{ 'Username'|trans }}</label>
+											{{ form_widget(form.username) }}
+										</div>
+										<div class="col-sm-6">
+											<div class="text-danger">{{ form_errors(form.fullName) }}</div>
+											<label class="form-label">{{ 'FullName'|trans }}</label>
+											{{ form_widget(form.fullName) }}
+										</div>
+										<div class="col-sm-6">
+											<div class="text-danger">{{ form_errors(form.phoneNumber) }}</div>
+											<label class="form-label">{{ 'Phone Number'|trans }}</label>
+											{{ form_widget(form.phoneNumber) }}
+										</div>
+
+										<div class="col-sm-6">
+											<div class="text-danger">{{ form_errors(form.email) }}</div>
+											<label class="form-label">{{ 'Email'|trans }}</label>
+											{{ form_widget(form.email) }}
+										</div>
+
+										<div class="col-12">
+											<div class="text-danger">{{ form_errors(form.address) }}</div>
+											<label class="form-label">{{ 'Address'|trans }}</label>
+											{{ form_widget(form.address) }}
+										</div>
+
+										<div class="col-12">
+											<button class="theme_btn" type="submit">
+												{{ 'Save Change'|trans }}
+												<span class="theme_btn_eff"></span>
+											</button>
+										</div>
+
+
+									</div>
+
+								</div>
+								{{ form_end(form) }}
+							</div>
+						</div>
+					</div>
+					<div class="blog-shadow">
+						<div class="row">
+							<div class="col-lg-12">
+								<h3>{{ 'Cahange password'|trans }}</h3>
+								{{ form_start(formPassword,{'attr':{'class':'theme-form'}}) }}
+								<div class="theme-card">
+									<div class="form-row row g-3">
+
+										<div class="col-sm-6">
+											<div class="text-danger">{{ form_errors(formPassword.oldPassword) }}</div>
+											<label class="form-label">{{ 'Old Password'|trans }}</label>
+											{{ form_widget(formPassword.oldPassword) }}
+										</div>
+										<div class="col-sm-6">
+											<div class="text-danger">{{ form_errors(formPassword.newPassword) }}</div>
+											<label class="form-label">{{ 'New Password'|trans }}</label>
+											{{ form_widget(formPassword.newPassword) }}
+										</div>
+
+										<div class="col-sm-6">
+											<div class="text-danger">{{ form_errors(formPassword.confirmNewPassword) }}</div>
+											<label class="form-label">{{ 'Comfirm Password'|trans }}</label>
+											{{ form_widget(formPassword.confirmNewPassword) }}
+										</div>
+
+										<div class="col-12">
+											<button class="theme_btn" type="submit">
+												{{ 'Save Change'|trans }}
+												<span class="theme_btn_eff"></span>
+											</button>
+										</div>
+
+									</div>
+
+								</div>
+								{{ form_end(formPassword) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- News Start -->
+
+{% endblock %}

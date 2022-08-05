@@ -1,0 +1,146 @@
+{% extends 'baseDash.html.twig' %}
+
+{% block body %}
+
+	<!--breadcrumb-->
+	<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+		<div class="breadcrumb-title pe-3">{{ 'Sub Category'|trans }}</div>
+		<div class="ps-3">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb mb-0 p-0">
+					<li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="bx bx-home-alt"></i></a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{ 'List'|trans }}</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+
+
+	<!--end breadcrumb-->
+	<div class="row">
+		<div class="col-xl-10 mx-auto">
+			<div class="card">
+				<div class="card-body">
+					<div class="card-title d-flex align-items-center">
+						<h5 class="mb-0 text-primary">{{ 'Filter By Category'|trans }}</h5>
+					</div>
+					<hr>
+					{{ form_start(formFilter,{'attr':{'class':'needs-validation clearfix'}}) }}
+					<div class="col-md-12">
+						<label for="inputName" class="form-label">{{ 'Name'|trans }}</label>
+						<div class="col-12">
+							<div class="row">
+								<div class="col-md-6">
+									{{ form_widget(formFilter.category,{'attr':{'class':'form-select'}}) }}
+								</div>
+								<div class="col-md-6">
+									<button type="submit" class="btn btn-primary float-end px-4">{{ 'Filter'|trans }} <i class="fa fa-filter"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ form_end(formFilter) }}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-10 mx-auto">
+			<div class="card">
+				<div class="card-body">
+					{% for type,messages in app.flashes %}
+						{% for message in messages %}
+							<div class="alert alert-{{ type }} border-0 bg-{{ type }} alert-dismissible fade show py-2">
+								<div class="d-flex align-items-center">
+									<div class="font-35 text-white">
+										{% if type =="success" %}
+											<i class="bx bxs-check-circle"></i>
+										{% else %}
+											<i class="bx bxs-message-square-x"></i>
+										{% endif %}
+									</div>
+									<div class="ms-3">
+										<h6 class="mb-0 text-white">{{ type }}</h6>
+										<div class="text-white">{{ message }}</div>
+									</div>
+								</div>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+						{% endfor %}
+					{% endfor %}
+					<div class="card-title d-flex align-items-center">
+						<h5 class="mb-0 text-primary">{{ 'Add Sub Category to'|trans }} {{ category.name }}</h5>
+					</div>
+					<hr>
+					{{ form_start(form,{'attr':{'class':'needs-validation clearfix'}}) }}
+					<div class="col-md-12">
+						<label for="inputName" class="form-label">{{ 'Name'|trans }}</label>
+						<div class="col-12">
+							<div class="row">
+								<div class="col-md-6">
+									{{ form_widget(form.name) }}
+									<div class="text-danger">{{ form_errors(form.name)}}</div>
+								</div>
+								<div class="col-md-6">
+									<button type="submit" class="btn btn-primary float-end px-5">{{ 'Save'|trans }} <i class="fa fa-save m-l10"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-10 mx-auto">
+			<div class="card">
+				<div class="card-body">
+					<div class="table-responsive">
+						<table id="example" class="table table-striped table-bordered" style="width:100%">
+							<thead>
+							<tr>
+								<th scope="col">{{ 'Name'|trans }}</th>
+								<th scope="col">{{ 'Sub Categories'|trans }}</th>
+								<th scope="col">Action</th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for subCategory in subCategories |sort|reverse %}
+								<tr>
+									<td>{{ subCategory.name }}</td>
+									<td>{{ subCategory.Category.name }}</td>
+									<td>
+										<a href='{{ path('admin_subCategory_edit',{'slugCategory':subCategory.category.slug,'slug':subCategory.slug})}}'><i class='fas fa-edit text-success'></i></a>
+										<a href='javascript:void(0)' data-bs-toggle="modal" data-bs-target="#exampleModal" onclick='deleteAction("{{ path('admin_subCategory_delete',{'slugCategory':subCategory.category.slug,'slug':subCategory.slug})}}")'><i class='far fa-trash-alt ms-text-danger'></i></a>
+									</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--end row-->
+	<div class="row row-cols-auto g-3">
+		<div class="col">
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">{{'Delete Confirm !'|trans}}</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">{{ 'Do you really want to delete ?'|trans }}</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Close'|trans }}</button>
+							<a href="#" id="linkDelete" type="button" class="btn btn-primary">{{ 'Delete'|trans }}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{%  endblock %}

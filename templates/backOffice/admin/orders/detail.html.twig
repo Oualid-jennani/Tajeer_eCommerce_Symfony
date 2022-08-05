@@ -1,0 +1,120 @@
+{% extends 'baseDash.html.twig' %}
+{% block body %}
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Applications</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Invoice</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+    <div class="card">
+        <div class="card-body">
+            <div id="invoice">
+                <div class="mh-100 pt-4 pb-5">
+                    <div style="min-width: 600px">
+                        <main>
+                            <div class="row contacts">
+                                <div class="col invoice-to">
+
+                                    <h4 class="text-primary">Client Info</h4>
+                                    <p class="mb-0"><b>Name :</b> {{ order.fullName }}</p>
+                                    <p class="mb-0"><b>Phone :</b> {{ order.phone }}</p>
+                                    <p class="mb-0"><b>Address :</b> {{ order.address|raw }}</p>
+                                    <p class="mb-0"><b>City :</b> {{ order.city.name }}</p>
+                                    <p class="mb-0"><b>Country :</b> {{ order.city.country.name }}</p>
+
+                                </div>
+                                <div class="col invoice-details">
+                                    <h1 class="invoice-id">Order</h1>
+                                    <div class="date">Track Number : {{ order.trackNumber }}</div>
+                                    <div class="date">Order Date : {{ order.orderDate|date("d/m/Y") }}</div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                    <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+                    <div></div>
+                </div>
+                <div class="overflow-auto">
+                    <div style="min-width: 600px">
+                        <main>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Seller</th>
+                                    <th scope="col">image</th>
+                                    <th scope="col">product name</th>
+                                    <th scope="col">price</th>
+                                    <th scope="col">quantity</th>
+                                    <th scope="col">total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for cart in order.carts|sort|reverse %}
+                                    {% for line in cart.cartLines %}
+                                        <tr>
+                                            {% if loop.index == 1 %}
+                                                <td rowspan="{{ cart.cartLines|length }}">
+                                                    <h3 class="text-primary">{{ cart.seller.storeName }}</h3>
+                                                </td>
+                                            {% endif %}
+                                            <td class="text-left">
+                                                <img src="{{ asset('images/product/'~line.product.images[0]) }}" width="70px" height="70px" alt="">
+                                            </td>
+                                            <td>
+                                                {{ line.product.name }}
+                                                {% if not line.variant|default(null) %}
+                                                    | <small class="text-primary">Dhs</small>
+                                                {% endif %}
+                                                DH
+                                            </td>
+                                            <td class="text-left">
+                                                {% if not line.variant | default(null) %}
+                                                    {{ line.product.price|number_format(2, ',', ' ') }}
+                                                {% else %}
+                                                    {{ line.variant.price|number_format(2, ',', ' ') }}
+                                                {% endif %}
+                                                DH
+                                            </td>
+                                            <td class="text-left">{{ line.quantity }}</td>
+                                            <td class="text-left bg-primary text-white">{{ line.total }}DH</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td colspan="5"></td><td class="text-center bg-gradient-blues fw-bold text-white">{{ cart.total }} Dhs</td>
+                                    </tr>
+                                    {% set fees = order.total * tajeerFees /100 %}
+                                    <tr>
+                                        <td colspan="4"></td>
+                                        <td class="text-center fw-bold">Fees :</td>
+                                        <td class="text-center bg-gradient-blues fw-bold text-white">{{ fees | number_format(2, ',', ' ') }} Dhs</td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                                <tfoot>
+                                {% set fees = order.total * tajeerFees /100 %}
+                                {% set TWF = order.total +fees %}
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">Total with fees</td>
+                                    <td colspan="2" class="text-center fw-bold">{{ TWF |number_format(2, ',', ' ')  }}DH</td>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+                        </main>
+                    </div>
+                    <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%  endblock %}

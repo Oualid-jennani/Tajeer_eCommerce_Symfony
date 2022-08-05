@@ -1,0 +1,96 @@
+{% extends 'baseDash.html.twig' %}
+{% block body %}
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">{{ 'Orders'|trans }}</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ 'Details'|trans }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+    <div class="card">
+        <div class="card-body">
+            <div id="invoice">
+
+                <div class="invoice overflow-auto">
+                    <div style="min-width: 600px">
+                        <main>
+                            <div class="row contacts">
+                                <div class="col invoice-to">
+
+                                    <h4 class="text-primary">Client Info</h4>
+                                    <p class="mb-0"><b>{{ 'Name'|trans }} :</b> {{ order.fullName }}</p>
+                                    <p class="mb-0"><b>{{ 'Phone'|trans }} :</b> {{ order.phone }}</p>
+                                    <p class="mb-0"><b>{{ 'Address'|trans }} :</b> {{ order.address|raw }}</p>
+                                    <p class="mb-0"><b>{{ 'City'|trans }} :</b> {{ order.city.name }}</p>
+                                    <p class="mb-0"><b>{{ 'Country'|trans }} :</b> {{ order.city.country.name }}</p>
+
+
+
+                                </div>
+                                <div class="col invoice-details">
+                                    <h1 class="invoice-id">{{ 'Order'|trans }}</h1>
+                                    <div class="date">Track Number : {{ order.trackNumber }}</div>
+                                    <div class="date">{{ 'Order Date'|trans }} : {{ order.orderDate|date("d/m/Y") }}</div>
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th scope="col">image</th>
+                                    <th scope="col">{{ 'product name'|trans }}</th>
+                                    <th scope="col">{{ 'price'|trans }}</th>
+                                    <th scope="col">{{ 'quantity'|trans }}</th>
+                                    <th scope="col">total</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for line in cart.cartLines %}
+                                        <tr>
+                                            <td class="text-left">
+                                                <img src="{{ asset('images/product/'~line.product.images[0]) }}" width="70px" height="70px" alt="">
+                                            </td>
+                                            <td>
+                                                {{ line.product.name }}
+                                                {% if line.variant is not null %}
+                                                     | <small class="text-primary">{{ line.variant.unity }}</small>
+                                                {% endif %}
+                                                DH
+                                            </td>
+                                            <td class="text-left">
+                                                {% if not line.variant|default(null) %}
+                                                    {{ line.product.price|number_format(2, ',', ' ') }}
+                                                {% else %}
+                                                    {{ line.variant.price|number_format(2, ',', ' ') }}
+                                                {% endif %}
+                                                DH
+                                            </td>
+                                            <td class="text-left">{{ line.quantity }}</td>
+                                            <td class="text-left bg-primary text-white">{{ line.total }} Dhs</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">{{ 'SUBTOTAL'|trans }}</td>
+                                        <td>{{ cart.total }} Dhs</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </main>
+                    </div>
+                    <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%  endblock %}

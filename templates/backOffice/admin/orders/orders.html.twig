@@ -1,0 +1,122 @@
+{% extends 'baseDash.html.twig' %}
+
+{% block body %}
+
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">{{ 'Orders'|trans }}</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ 'List'|trans }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-xl-10">
+                            <div class="col-10">
+                                <select class="form-select" name="status" id="status" aria-label="Default select example">
+                                    <option selected value="all"><a href="{{ path('admin_orders', {'status': 'all'}) }}">All</a></option>
+                                    <option value="{{ path('admin_orders', {'status': 'INITIATED'}) }}">{{ 'New'|trans }}</option>
+                                    <option value="{{ path('admin_orders', {'status': 'VALIDATED'}) }}">{{ 'Validated'|trans }}</option>
+                                    <option value="{{ path('admin_orders', {'status': 'CANCELED'}) }}">{{ 'Canceled'|trans }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-xl-2">
+                            <a href="javascript:void(0)" class="btn btn-primary mb-3 mb-lg-0" id="filter">
+                                {{ 'Filter'|trans }} <i class="fa fa-filter ms-2"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    {% for type,messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }} border-0 bg-{{ type }} alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-white">
+                                        {% if type =="success" %}
+                                            <i class="bx bxs-check-circle"></i>
+                                        {% else %}
+                                            <i class="bx bxs-message-square-x"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-white">{{ type }}</h6>
+                                        <div class="text-white">{{ message }}</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                    <div class="card-title d-flex align-items-center">
+                        <h5 class="mb-0 text-primary">{{ 'Oeders List'|trans }}</h5>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="example" class="table mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>{{ 'Order Date'|trans }}</th>
+                                <th>{{ 'Customer Name'|trans }}</th>
+                                <th>{{ 'Customer Phone'|trans }}</th>
+                                <th>{{ 'Actions'|trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders |sort|reverse %}
+                                <tr>
+                                    <td>{{ order.trackNumber }}</td>
+                                    <td>{{ order.orderDate|date("d/m/Y") }}</td>
+                                    <td>{{ order.fullName }}</td>
+                                    <td>{{ order.phone }}</td>
+                                    <td>
+                                        <a href="{{ path('admin_order_detail',{'trackNumber':order.trackNumber}) }}" class="btn btn-primary btn-sm radius-30 px-4">{{ 'View Details'|trans }}</a>
+                                        {% if order.status == "INITIATED" %}
+                                            <a href="{{ path('admin_orders_change_status',{'trackNumber':order.trackNumber,'status':'VALIDATED' }) }}" class="btn btn-success btn-sm radius-30 px-4">{{ 'Validate'|trans }} <i class="fa fa-check ms-2"></i></a>
+                                            <a href="{{ path('admin_orders_change_status',{'trackNumber':order.trackNumber,'status':'CANCELED'}) }}" class="btn btn-danger btn-sm radius-30 px-4">{{ 'Cancel'|trans }} <i class="fas fa-times ms-2"></i></a>
+                                        {% endif %}
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--end row-->
+
+{%  endblock %}
+
+{% block javascripts %}
+    <script>
+        $("select#status").change(function(){
+            var link = $(this).children("option:selected").val();
+            $("#filter").prop("href", link);
+        });
+    </script>
+{% endblock %}

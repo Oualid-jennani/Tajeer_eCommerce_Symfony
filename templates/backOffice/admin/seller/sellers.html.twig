@@ -1,0 +1,60 @@
+{% extends 'baseDash.html.twig' %}
+
+{% block title %}Sellers{% endblock %}
+
+{% block body %}
+
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">{{ 'Sellers'|trans }}</div>
+    </div>
+    <!--end breadcrumb-->
+
+    <!--end row-->
+    <div class="row">
+        <h6 class="mb-0 text-uppercase">{{ 'Sellers' }}</h6>
+        <hr/>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>{{ 'Username'|trans }}</th>
+                            <th>{{ 'FullName'|trans }}</th>
+                            <th>{{ 'Email'|trans }}</th>
+                            <th>{{ 'Phone'|trans }}</th>
+                            <th>{{ 'Store Name'|trans }}</th>
+                            <th>{{ 'Store Phone'|trans }}</th>
+                            <th>{{ 'Country'|trans }}</th>
+                            <th>{{ 'City'|trans }}</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for seller in sellers %}
+                            <tr>
+                                <td>{{ seller.username }}</td>
+                                <td>{{ seller.fullName }}</td>
+                                <td>{{ seller.email }}</td>
+                                <td>{{ seller.phoneNumber }}</td>
+                                <td>{{ seller.storeName }}</td>
+                                <td>{{ seller.storePhone}}</td>
+                                <td>{{ seller.city.country.name}}</td>
+                                <td>{{ seller.city.name}}</td>
+                                <td>
+                                    <div class="d-flex order-actions">
+                                        <a href="javascript:;" class=""><i class="bx bxs-edit"></i></a>
+                                        <a href="{{ path('admin_sellers_delete',{'id':seller.id}) }}" class="ms-3"><i class="bx bxs-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
